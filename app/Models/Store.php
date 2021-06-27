@@ -12,4 +12,9 @@ class Store extends Model
     const TYPE_SHOP = "shop";
     const TYPE_CAFE = "cafe";
     const TYPE_RESTAURANT = "restaurant";
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

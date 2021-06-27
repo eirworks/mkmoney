@@ -12,6 +12,12 @@
         </ul>
         <h2>@yield('title')</h2>
 
+        <div class="my-3">
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Tambahkan Bisnis</a>
+            </div>
+        </div>
+
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -31,13 +37,22 @@
                         <td>
                             <div class="btn-group btn-sm">
                                 <a href="#" class="btn btn-link py-0">Edit</a>
-                                <a href="#" class="btn btn-link py-0">Transaksi</a>
+                                @if(auth()->user()->store_id != $store->id)
+                                    <button form="set_default_{{ $store->id }}" class="btn btn-link py-0">Jadikan bisnis utama</button>
+                                @endif
                             </div>
                         </td>
                     </tr>
+                    <form onsubmit="return confirm('Anda yakin ingin menjadikan bisnis ini menjadi bisnis utama anda?')" id="set_default_{{ $store->id }}" action="{{ route('stores::set-default', [$store]) }}" method="post">
+                        @method('put')
+                        @csrf
+                    </form>
                 @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="my-3">
+            Anda telah menggunakan jatah bisnis {{ $store_count }}/{{ $max_stores }}
         </div>
     </div>
 @endsection

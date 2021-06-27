@@ -22,7 +22,7 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth::'], function() {
     });
 
     Route::group(['middleware' => 'auth'], function() {
-        Route::get('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+        Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
     });
 });
 
@@ -32,5 +32,7 @@ Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'ind
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'stores', 'as' => 'stores::'], function() {
         Route::get('/', [\App\Http\Controllers\StoreController::class, 'index'])->name('index');
+        Route::get('/{store}', [\App\Http\Controllers\StoreController::class, 'show'])->name('show');
+        Route::put('/set-default/{store}', [\App\Http\Controllers\StoreController::class, 'setDefaultStore'])->name('set-default');
     });
 });
