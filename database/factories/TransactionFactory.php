@@ -22,7 +22,10 @@ class TransactionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'store_id' => 1,
+            'category_id' => 1,
+            'info' => "Transaksi ".$this->faker->colorName,
+            'amount' => rand(1, 99) * 1000 * ($this->faker->boolean ? 1 : -1 ),
         ];
     }
 }

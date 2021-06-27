@@ -32,7 +32,7 @@
                 @foreach($stores as $store)
                     <tr>
                         <td>{{ $store->id }}</td>
-                        <td><a href="#">{{ $store->name }}</a></td>
+                        <td><a href="{{ route('stores::show', [$store]) }}">{{ $store->name }}</a></td>
                         <td>{{ $store->type }}</td>
                         <td>
                             <div class="btn-group btn-sm">

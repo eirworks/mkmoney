@@ -40,12 +40,14 @@
                 </table>
             @endif
         </div>
-        <div class="card-footer">
-            <div class="btn-group">
-                <a href="{{ route('stores::show', [$store['id']]) }}" class="btn btn-link fw-bold">{{ $store['name'] }}</a>
-                <a href="#" class="btn btn-link">Semua Transaksi</a>
-                <a href="#" class="btn btn-link">Lihat Laporan</a>
+        @if($store)
+            <div class="card-footer">
+                <div class="btn-group">
+                    <a href="{{ route('stores::show', [$store['id']]) }}" class="btn btn-link fw-bold">{{ $store['name'] }}</a>
+                    <a href="#" class="btn btn-link">Semua Transaksi</a>
+                    <a href="#" class="btn btn-link">Lihat Laporan</a>
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 </div>
