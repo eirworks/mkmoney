@@ -32,7 +32,11 @@ Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'ind
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'stores', 'as' => 'stores::'], function() {
         Route::get('/', [\App\Http\Controllers\StoreController::class, 'index'])->name('index');
+        Route::get('/new', [\App\Http\Controllers\StoreController::class, 'create'])->name('create');
+        Route::post('/new', [\App\Http\Controllers\StoreController::class, 'store'])->name('store');
         Route::get('/{store}', [\App\Http\Controllers\StoreController::class, 'show'])->name('show');
+        Route::get('/{store}/edit', [\App\Http\Controllers\StoreController::class, 'edit'])->name('edit');
+        Route::put('/{store}/edit', [\App\Http\Controllers\StoreController::class, 'update'])->name('update');
         Route::put('/set-default/{store}', [\App\Http\Controllers\StoreController::class, 'setDefaultStore'])->name('set-default');
     });
 });

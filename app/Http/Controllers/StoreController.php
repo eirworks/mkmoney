@@ -30,6 +30,23 @@ class StoreController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        $store = new Store();
+
+        return view('stores.form', [
+            'store' => $store
+        ]);
+    }
+
+    public function edit(Store $store)
+    {
+
+        return view('stores.form', [
+            'store' => $store
+        ]);
+    }
+
     public function setDefaultStore(Store $store)
     {
         auth()->user()->store_id = $store->id;

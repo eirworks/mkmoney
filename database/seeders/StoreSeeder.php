@@ -18,7 +18,7 @@ class StoreSeeder extends Seeder
         Store::truncate();
 
         User::all()->each(function($user) {
-            Store::factory()->count(3)->create([
+            Store::factory()->count(1)->create([
                 'user_id' => $user->id,
             ]);
         });

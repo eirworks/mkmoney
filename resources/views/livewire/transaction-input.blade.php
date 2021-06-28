@@ -1,14 +1,27 @@
 <div>
     <div class="card">
         <div class="card-body">
-            <div class="row g-3 align-items-center">
+            <div class="row g-3 align-items-end">
                 <div class="col-auto">
-                    <input type="text" class="form-control" placeholder="Keterangan" wire:model.defer="info">
+                    <label for="store">Nama Toko</label>
+                    <input type="text" class="form-control" placeholder="Beli dimana?">
                 </div>
                 <div class="col-auto">
+                    <label for="info">Keterangan</label>
+                    <input type="text" class="form-control" wire:model.defer="info" placeholder="Apa yang dibeli?">
+                </div>
+                <div class="col-auto">
+                    <label for="amount">Nilai</label>
                     <div class="input-group">
                         <div class="input-group-text">Rp</div>
                         <input type="number" class="form-control" placeholder="Jumlah" wire:model.defer="amount">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <label for="amount">Jumlah Barang</label>
+                    <div class="input-group">
+                        <div class="input-group-text">@</div>
+                        <input type="number" min="0" class="form-control" placeholder="Berapa banyak?">
                     </div>
                 </div>
                 <div class="col-auto">

@@ -10,8 +10,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="btn-group">
-                            <a href="#" class="btn btn-link">Semua Transaksi</a>
-                            <a href="#" class="btn btn-link">Tambah Transaksi</a>
+                            <a href="{{ route('stores::show', [$store['id']]) }}" class="btn btn-link">Semua Transaksi</a>
                         </div>
                     </div>
                 </div>

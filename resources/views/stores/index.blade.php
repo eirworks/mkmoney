@@ -14,7 +14,7 @@
 
         <div class="my-3">
             <div class="btn-group">
-                <a href="#" class="btn btn-primary">Tambahkan Bisnis</a>
+                <a href="{{ route('stores::create') }}" class="btn btn-primary">Tambahkan Bisnis</a>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                         <td>{{ $store->type }}</td>
                         <td>
                             <div class="btn-group btn-sm">
-                                <a href="#" class="btn btn-link py-0">Edit</a>
+                                <a href="{{ route('stores::edit', [$store]) }}" class="btn btn-link py-0">Edit</a>
                                 @if(auth()->user()->store_id != $store->id)
                                     <button form="set_default_{{ $store->id }}" class="btn btn-link py-0">Jadikan bisnis utama</button>
                                 @endif
@@ -52,7 +52,7 @@
             </table>
         </div>
         <div class="my-3">
-            Anda telah menggunakan jatah bisnis {{ $store_count }}/{{ $max_stores }}
+            Anda telah menggunakan {{ $store_count }} dari {{ $max_stores }} bisnis per pengguna.
         </div>
     </div>
 @endsection

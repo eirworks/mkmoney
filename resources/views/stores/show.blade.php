@@ -14,8 +14,15 @@
         <h2>@yield('title')</h2>
         <div class="my-2 text-muted small">
             ID: #{{ $store->id }}
-            Dibuat pada {{ $store->created_at }}
-            Terakhir diupdate: {{ $store->updated_at }}
+            Dibuat pada {{ \Illuminate\Support\Carbon::simpleDatetime($store->created_at) }}
+            Terakhir diupdate: {{ \Illuminate\Support\Carbon::simpleDatetime($store->update_at) }}
+        </div>
+
+        <div class="my-3">
+            <div class="btn-group">
+                <a href="#" class="btn btn-outline-secondary">Edit Bisnis</a>
+                <a href="#" class="btn btn-outline-secondary">Kategori</a>
+            </div>
         </div>
 
         <div class="my-3">
