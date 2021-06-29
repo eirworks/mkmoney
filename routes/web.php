@@ -38,5 +38,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::get('/{store}/edit', [\App\Http\Controllers\StoreController::class, 'edit'])->name('edit');
         Route::put('/{store}/edit', [\App\Http\Controllers\StoreController::class, 'update'])->name('update');
         Route::put('/set-default/{store}', [\App\Http\Controllers\StoreController::class, 'setDefaultStore'])->name('set-default');
+
+        Route::group(['prefix' => '{store}/categories', 'as' => 'categories::'], function() {
+            Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('index');
+        });
     });
 });

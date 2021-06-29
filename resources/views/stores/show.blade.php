@@ -21,7 +21,7 @@
         <div class="my-3">
             <div class="btn-group">
                 <a href="{{ route('stores::edit', [$store]) }}" class="btn btn-outline-secondary">Edit Bisnis</a>
-                <a href="#" class="btn btn-outline-secondary">Kategori</a>
+                <a href="{{ route('stores::categories::index', [$store]) }}" class="btn btn-outline-secondary">Kategori</a>
             </div>
         </div>
 
