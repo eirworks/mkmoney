@@ -22,6 +22,10 @@ class Store extends Model
         ];
     }
 
+    protected $fillable = [
+        'name', 'type'
+    ];
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);

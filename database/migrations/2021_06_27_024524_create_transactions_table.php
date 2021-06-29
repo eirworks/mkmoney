@@ -17,6 +17,9 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->bigInteger('store_id')->index();
             $table->bigInteger('category_id')->index();
+            $table->string('shop');
+            $table->double('qty')->default(1.0);
+            $table->integer('unit');
             $table->decimal('amount', 14, 2);
             $table->string('info');
             $table->timestamps();

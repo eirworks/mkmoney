@@ -32,7 +32,7 @@
             @foreach($transactions as $transaction)
                 <tr>
                     <td>{{ \Illuminate\Support\Carbon::simpleDate($transaction->created_at) }}</td>
-                    <td>Toko Warna</td>
+                    <td>{{ $transaction->shop }}</td>
                     <td>{{ $transaction->info }}</td>
                     <td><a href="#">?</a></td>
                     <td>1</td>

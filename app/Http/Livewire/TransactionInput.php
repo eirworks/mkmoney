@@ -7,8 +7,11 @@ use Livewire\Component;
 
 class TransactionInput extends Component
 {
+    public $shop = "";
     public $info = "";
     public $amount = 0;
+    public $qty = 1;
+    public $unit = 1;
     public $category_id = 0;
 
     public Store $store;
@@ -32,9 +35,12 @@ class TransactionInput extends Component
 
     public function resetInputs()
     {
+        $this->shop = "";
         $this->info = "";
         $this->amount = 0;
         $this->category_id = 0;
+        $this->unit = 0;
+        $this->qty = 0;
     }
 
     public function render()

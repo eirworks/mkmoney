@@ -47,6 +47,21 @@ class StoreController extends Controller
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $store = new Store($request->only(['name', 'type']));
+        $store->image = "";
+
+        $store->save();
+    }
+
+    public function update(Request $request, Store $store)
+    {
+        $store->fill($request->only(['name', 'type']));
+        $store->image = "";
+                $store->save();
+    }
+
     public function setDefaultStore(Store $store)
     {
         auth()->user()->store_id = $store->id;
