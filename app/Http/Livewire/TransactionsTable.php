@@ -11,10 +11,20 @@ class TransactionsTable extends Component
     use WithPagination;
     public Store $store;
     public int $limit = 25;
+    public bool $showFilters = false;
+
+    public int $filterYear;
+    public int $filterMonth;
 
     protected $listeners = [
         'transactionAdded' => 'getTransactions'
     ];
+
+    public function mount()
+    {
+        $this->filterYear = now()->year;
+        $this->filterMonth = now()->month;
+    }
 
     public function getTransactions($page = 1)
     {
@@ -23,25 +33,25 @@ class TransactionsTable extends Component
         }
     }
 
+    public function toggleFilters()
+    {
+        $this->showFilters = !$this->showFilters;
+    }
+
     public function render()
     {
         $transactions = $this->store->transactions()->latest('id')
-            ->whereMonth('created_at',now()->month)
-            ->whereYear('created_at',now()->year)
+            ->whereMonth('created_at',$this->filterMonth)
+            ->whereYear('created_at',$this->filterYear)
             ->paginate($this->limit);
 
         $total = $this->store->transactions()
-            ->whereMonth('created_at',now()->month)
-            ->whereYear('created_at',now()->year)
-            ->sum('amount');
-
-        $totalBefore = $this->store->transactions()
-            ->whereDate('created_at', '<', now()->startOfMonth())
+            ->whereMonth('created_at',$this->filterMonth)
+            ->whereYear('created_at',$this->filterYear)
             ->sum('amount');
 
         return view('livewire.transactions-table', [
             'transactions' => $transactions,
-            'total_before' => $totalBefore,
             'total' => $total,
         ]);
     }

@@ -19,10 +19,12 @@ class TransactionSeeder extends Seeder
 
         Store::all()->each(function($store) {
             for($i=3; $i>=0; $i--) {
-                Transaction::factory()->count(3)->create([
-                    'created_at' => now()->subMonths($i),
-                    'store_id' => $store->id,
-                ]);
+                for($day=0;$day<=3; $day++) {
+                    Transaction::factory()->count(3)->create([
+                        'created_at' => now()->subMonths($i)->subDays($day),
+                        'store_id' => $store->id,
+                    ]);
+                }
             }
         });
     }

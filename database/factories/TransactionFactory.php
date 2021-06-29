@@ -25,9 +25,9 @@ class TransactionFactory extends Factory
             'store_id' => 1,
             'category_id' => 1,
             'info' => "Transaksi ".$this->faker->colorName,
-            'amount' => rand(1, 99) * 1000 * ($this->faker->boolean ? 1 : -1 ),
+            'amount' => rand(1, 99) * 1000,
             'shop' => 'Toko '.$this->faker->streetName,
-            'qty' => 1,
+            'qty' => $this->faker->boolean ? 1 : rand(1, 3),
             'unit' => 1,
         ];
     }

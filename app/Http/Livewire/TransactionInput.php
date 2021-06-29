@@ -16,6 +16,8 @@ class TransactionInput extends Component
 
     public Store $store;
 
+    public bool $showForm = true;
+
     public function submitTransaction()
     {
         if ($this->category_id == 0)
@@ -51,6 +53,11 @@ class TransactionInput extends Component
         $this->category_id = 0;
         $this->unit = 1;
         $this->qty = 1;
+    }
+
+    public function toggleForm()
+    {
+        $this->showForm = !$this->showForm;
     }
 
     public function render()
