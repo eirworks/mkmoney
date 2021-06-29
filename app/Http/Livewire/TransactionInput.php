@@ -23,8 +23,18 @@ class TransactionInput extends Component
             $this->emit('error:invalid_category');
             return;
         }
+
+        if (empty($this->shop) || empty($this->info))
+        {
+            $this->emit('error:invalid_inputs');
+            return;
+        }
+
         $transaction = $this->store->transactions()->create([
             'info' => $this->info,
+            'shop' => $this->shop,
+            'qty' => $this->qty,
+            'unit' => $this->unit,
             'amount' => $this->amount,
             'category_id' => $this->category_id,
         ]);
@@ -39,8 +49,8 @@ class TransactionInput extends Component
         $this->info = "";
         $this->amount = 0;
         $this->category_id = 0;
-        $this->unit = 0;
-        $this->qty = 0;
+        $this->unit = 1;
+        $this->qty = 1;
     }
 
     public function render()
