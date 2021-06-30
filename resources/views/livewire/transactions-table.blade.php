@@ -68,7 +68,7 @@
                         <td><button class="btn btn-link text-dark p-0 m-0">{{ \Illuminate\Support\Carbon::simpleDate($transaction->created_at) }}</button></td>
                         <td>{{ $transaction->shop }}</td>
                         <td>{{ $transaction->info }}</td>
-                        <td><button class="btn btn-link p-0 m-0">{{ $transaction->category->name }}</button></td>
+                        <td><button class="btn btn-link p-0 m-0" wire:click="setCategory({{ $transaction->category_id }})">{{ $transaction->category->name }}</button></td>
                         <td>{{ $transaction->qty }}</td>
                         <td>{{ $transaction->unit }}</td>
                         <td class="text-end">{{ \Illuminate\Support\Str::currency($transaction->amount, 'Rp') }}</td>

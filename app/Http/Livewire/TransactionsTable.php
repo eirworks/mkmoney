@@ -43,6 +43,11 @@ class TransactionsTable extends Component
         $this->showFilters = !$this->showFilters;
     }
 
+    public function setCategory($category = 0)
+    {
+        $this->filterCategory = $category;
+    }
+
     public function render()
     {
         $transactions = $this->store->transactions()
