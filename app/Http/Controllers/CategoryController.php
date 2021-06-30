@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function index(Store $store)
     {
-        $categories = $store->categories()->paginate(25);
+        $categories = $store->categories()->latest('id')->paginate(25);
 
         return view('categories.index', [
             'categories' => $categories,

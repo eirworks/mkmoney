@@ -15,6 +15,9 @@ class TransactionsTable extends Component
 
     public int $filterYear;
     public int $filterMonth;
+    public int $filterCategory;
+
+    public $categories;
 
     protected $listeners = [
         'transactionAdded' => 'getTransactions'
@@ -24,6 +27,8 @@ class TransactionsTable extends Component
     {
         $this->filterYear = now()->year;
         $this->filterMonth = now()->month;
+        $this->filterCategory = 0;
+        $this->categories = $this->store->categories()->orderBy('name')->select(['id', 'name'])->get()->toArray();
     }
 
     public function getTransactions($page = 1)
@@ -40,9 +45,13 @@ class TransactionsTable extends Component
 
     public function render()
     {
-        $transactions = $this->store->transactions()->latest('id')
+        $transactions = $this->store->transactions()
             ->whereMonth('created_at',$this->filterMonth)
             ->whereYear('created_at',$this->filterYear)
+            ->when($this->filterCategory > 0, function($query) {
+                $query->where('category_id', $this->filterCategory);
+            })
+            ->with(['category:id,name'])
             ->paginate($this->limit);
 
         $total = $this->store->transactions()

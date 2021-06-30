@@ -38,9 +38,9 @@
                     <div class="col-auto">
                         <select name="category_id" id="category_id" class="form-control" wire:model.defer="category_id">
                             <option value="0">Pilih kategori:</option>
-                            @for($i=1;$i<=5;$i++)
-                                <option value="{{ $i }}">Kategori {{ $i }}</option>
-                            @endfor
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="col-auto">

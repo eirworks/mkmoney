@@ -20,3 +20,12 @@
     </div>
     @endif
 </div>
+
+@push('bottom')
+    <script>
+        Livewire.on('categorySubmitted', function() {
+            alert("Kategori telah ditambahkan!");
+            window.location.reload();
+        })
+    </script>
+@endpush

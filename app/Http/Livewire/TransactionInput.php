@@ -62,6 +62,8 @@ class TransactionInput extends Component
 
     public function render()
     {
-        return view('livewire.transaction-input');
+        return view('livewire.transaction-input', [
+            'categories' => $this->store->categories()->orderBy('name', 'asc')->select(['id', 'name'])->get(),
+        ]);
     }
 }

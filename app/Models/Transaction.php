@@ -13,4 +13,8 @@ class Transaction extends Model
         'info', 'amount', 'category_id',
         'shop', 'qty', 'unit'
     ];
+
+    public function category() {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -2,16 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Category;
 use App\Models\Store;
 use Livewire\Component;
 
 class CategoryForm extends Component
 {
-    private Store $store;
+    public Store $store;
 
     public bool $showForm = false;
-    public string $inputName;
-    public string $inputDescription;
+    public string $inputName = "";
+    public string $inputDescription = "";
 
     public function toggleForm()
     {
@@ -20,7 +21,22 @@ class CategoryForm extends Component
 
     public function submitCategory()
     {
-        $this->emit("categorySubmitted");
+        $category = new Category([
+            'name' => $this->inputName,
+            'description' => $this->inputDescription,
+        ]);
+        $category->store_id = $this->store->id;
+        $category->save();
+
+        $this->resetInputs();
+        $this->emit("categorySubmitted", $category->id);
+    }
+
+    public function resetInputs()
+    {
+        $this->showForm = false;
+        $this->inputName = "";
+        $this->inputDescription = "";
     }
 
     public function render()
