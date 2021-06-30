@@ -62,6 +62,9 @@ class TransactionsTable extends Component
         $total = $this->store->transactions()
             ->whereMonth('created_at',$this->filterMonth)
             ->whereYear('created_at',$this->filterYear)
+            ->when($this->filterCategory > 0, function($query) {
+                $query->where('category_id', $this->filterCategory);
+            })
             ->sum('amount');
 
         return view('livewire.transactions-table', [
