@@ -96,9 +96,9 @@
                                         <option value="{{ $transaction->id }}">{{ $transaction->category->name }}</option>
                                     </select>
                                 </td>
-                                <td><input type="number" class="form-control" value="{{ $transaction->qty }}"></td>
-                                <td><input type="number" class="form-control" value="{{ $transaction->unit }}"></td>
-                                <td class="text-end"><input type="number" class="form-control" value="{{ $transaction->amount }}"></td>
+                                <td><input type="number" class="form-control" value="{{ $transaction->qty }}" wire:model.defer="editInputQty"></td>
+                                <td><input type="number" class="form-control" value="{{ $transaction->unit }}" wire:model.defer="editInputUnit"></td>
+                                <td class="text-end"><input type="number" class="form-control" value="{{ $transaction->amount }}" wire:model.defer="editInputAmount"></td>
                                 <td>
                                     <button class="btn btn-outline-primary" wire:click="saveEdit">Simpan</button>
                                 </td>
