@@ -93,7 +93,9 @@
                                 <td><input type="text" class="form-control w-auto" value="{{ $transaction->info }}" wire:model.defer="editInputInfo"></td>
                                 <td>
                                     <select name="category_id" id="category_id" class="form-control" wire:model.defer="editInputCategoryId">
-                                        <option value="{{ $transaction->id }}">{{ $transaction->category->name }}</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
+                                        @endforeach
                                     </select>
                                 </td>
                                 <td><input type="number" class="form-control" value="{{ $transaction->qty }}" wire:model.defer="editInputQty"></td>
