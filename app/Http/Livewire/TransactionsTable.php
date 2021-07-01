@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Store;
+use App\Models\Transaction;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,6 +19,15 @@ class TransactionsTable extends Component
     public int $filterCategory;
 
     public $categories;
+    public int $transactionSelected = 0;
+    public bool $modeEdit = false;
+
+    public $editInputShop = "";
+    public $editInputInfo = "";
+    public $editInputQty = "";
+    public $editInputUnit = "";
+    public $editInputAmount = "";
+    public $editInputCategoryId = "";
 
     protected $listeners = [
         'transactionAdded' => 'getTransactions'
@@ -36,6 +46,50 @@ class TransactionsTable extends Component
         if ($page == 1) {
             $this->resetPage();
         }
+    }
+
+    public function selectTransaction($id) {
+        $this->transactionSelected = $id;
+    }
+
+    public function openEditForm($id) {
+        $transaction = Transaction::find($id);
+        $this->modeEdit = true;
+        $this->editInputShop = $transaction->shop;
+        $this->editInputInfo = $transaction->info;
+        $this->editInputQty = $transaction->qty;
+        $this->editInputUnit = $transaction->unit;
+        $this->editInputAmount = $transaction->amount;
+        $this->editInputCategoryId = $transaction->category_id;
+    }
+
+    public function saveEdit()
+    {
+        $transaction = Transaction::find($this->transactionSelected);
+
+        $transaction->fill([
+            'info' => $this->editInputInfo,
+            'shop' => $this->editInputShop,
+            'qty' => $this->editInputQty,
+            'unit' => $this->editInputUnit,
+            'amount' => $this->editInputAmount,
+            'category_id' => $this->editInputCategoryId,
+        ]);
+        $transaction->save();
+
+        $this->modeEdit = false;
+        $this->transactionSelected = 0;
+
+        $this->getTransactions();
+        $this->emit('transactionUpdated', $transaction->id);
+    }
+
+    public function deleteTransaction($id)
+    {
+        Transaction::where('id', $id)->delete();
+
+        $this->emit('transactionDeleted', $id);
+        $this->getTransactions();
     }
 
     public function toggleFilters()

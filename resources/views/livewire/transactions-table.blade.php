@@ -15,7 +15,7 @@
                     <div class="col-md-2">
                         <label for="filter_category_id">Pilih Kategori</label>
                         <select name="category_id" id="filter_category_id" class="form-control" wire:model.defer="filterCategory">
-                            <option value="0">Pilih Kategori:</option>
+                            <option value="0">Semua Kategori:</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                             @endforeach
@@ -65,7 +65,7 @@
             @if($transactions->count() > 0)
                 @foreach($transactions as $transaction)
                     <tr>
-                        <td><button class="btn btn-link text-dark p-0 m-0">{{ \Illuminate\Support\Carbon::simpleDate($transaction->created_at) }}</button></td>
+                        <td><button class="btn btn-link text-dark p-0 m-0" wire:click="$set('transactionSelected', '{{ $transaction->id }}')">{{ \Illuminate\Support\Carbon::simpleDate($transaction->created_at) }}</button></td>
                         <td>{{ $transaction->shop }}</td>
                         <td>{{ $transaction->info }}</td>
                         <td><button class="btn btn-link p-0 m-0" wire:click="setCategory({{ $transaction->category_id }})">{{ $transaction->category->name }}</button></td>
@@ -74,6 +74,37 @@
                         <td class="text-end">{{ \Illuminate\Support\Str::currency($transaction->amount, 'Rp') }}</td>
                         <td class="text-end">{{ \Illuminate\Support\Str::currency($transaction->amount * $transaction->qty, 'Rp') }}</td>
                     </tr>
+                    @if($transactionSelected == $transaction->id)
+                        @if(!$modeEdit)
+                            <tr>
+                                <td colspan="8">
+                                    <span class="text-muted">ID: {{ $transaction->id }}</span>
+                                    <div class="btn-group">
+                                        <button class="btn m-0 p-0 mx-2 btn-link text-dark" wire:click="$set('transactionSelected', '0')">Tutup</button>
+                                        <button class="btn m-0 p-0 mx-2 btn-link" wire:click="openEditForm({{ $transaction->id }})">Edit</button>
+                                        <button class="btn m-0 p-0 mx-2 btn-link text-danger" wire:click="deleteTransaction({{ $transaction->id }})">Hapus</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td><button class="btn btn-link text-muted" wire:click="$set('modeEdit', false)">Batal</button></td>
+                                <td><input type="text" class="form-control w-auto" value="{{ $transaction->shop }}" wire:model.defer="editInputShop"></td>
+                                <td><input type="text" class="form-control w-auto" value="{{ $transaction->info }}" wire:model.defer="editInputInfo"></td>
+                                <td>
+                                    <select name="category_id" id="category_id" class="form-control" wire:model.defer="editInputCategoryId">
+                                        <option value="{{ $transaction->id }}">{{ $transaction->category->name }}</option>
+                                    </select>
+                                </td>
+                                <td><input type="number" class="form-control" value="{{ $transaction->qty }}"></td>
+                                <td><input type="number" class="form-control" value="{{ $transaction->unit }}"></td>
+                                <td class="text-end"><input type="number" class="form-control" value="{{ $transaction->amount }}"></td>
+                                <td>
+                                    <button class="btn btn-outline-primary" wire:click="saveEdit">Simpan</button>
+                                </td>
+                            </tr>
+                        @endif
+                    @endif
                 @endforeach
             @else
                 <tr>
