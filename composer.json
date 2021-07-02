@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "anlutro/l4-settings": "^1.0",
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.10",
         "fideloper/proxy": "^4.4",
