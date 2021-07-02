@@ -53,6 +53,28 @@
                     </tr>
                     </tbody>
                 </table>
+
+                <div class="my-5 d-none d-print-block">
+                    <table class="table table-borderless">
+                        <tbody>
+                        <tr>
+                            <td style="width: 30%;">
+                                <div class="border-bottom border-dark"></div>
+                                <div class="my-5">&nbsp;</div>
+                                <div class="border-bottom border-dark mt-5 pt-5"></div>
+                                <div class="text-center mt-2">Bendahara</div>
+                            </td>
+                            <td>&nbsp;</td>
+                            <td style="width: 30%">
+                                <div class="border-bottom border-dark"></div>
+                                <div class="my-5">&nbsp;</div>
+                                <div class="border-bottom border-dark mt-5 pt-5"></div>
+                                <div class="text-center mt-2">Pemilik {{ $store->name }}</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
