@@ -19,6 +19,8 @@ Route::group(['namespace' => 'Auth', 'as' => 'auth::'], function() {
     Route::group(['middleware' => 'guest'], function() {
         Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
         Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'submitLogin'])->name('login::submit');
+        Route::get('register', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
+        Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register::submit');
     });
 
     Route::group(['middleware' => 'auth'], function() {

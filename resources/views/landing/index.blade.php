@@ -14,7 +14,7 @@
     <div class="container">
         @guest
         <div class="text-center my-5">
-            <a href="{{ route('auth::login') }}" class="btn btn-outline-primary btn-lg">Mulai Sekarang</a>
+            <a href="{{ route('auth::register') }}" class="btn btn-outline-primary btn-lg">Mulai Sekarang</a>
         </div>
         <div class="text-center">
             <a href="{{ route('auth::login') }}">Sudah punya akun?</a>
@@ -27,31 +27,31 @@
 
         <hr class="my-5 bg-light">
 
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6">
-                <div class="h2 text-center">Pemilik Bisnis Suka dengan {{ config('app.name') }}</div>
-            </div>
-        </div>
+{{--        <div class="row justify-content-center mt-5">--}}
+{{--            <div class="col-md-6">--}}
+{{--                <div class="h2 text-center">Pemilik Bisnis Suka dengan {{ config('app.name') }}</div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-        <div class="row justify-content-center my-3">
-            <div class="col-md-4">
-                <div class="card my-3">
-                    <div class="card-body">
-                        Saya suka dengan {{ config('app.name') }} karena
-                        sangat mudah digunakan.
-                        <div class="mt-3 fw-bold">Sherina T. &mdash; Sunset Cafe, Bali</div>
-                    </div>
-                </div>
+{{--        <div class="row justify-content-center my-3">--}}
+{{--            <div class="col-md-4">--}}
+{{--                <div class="card my-3">--}}
+{{--                    <div class="card-body">--}}
+{{--                        Saya suka dengan {{ config('app.name') }} karena--}}
+{{--                        sangat mudah digunakan.--}}
+{{--                        <div class="mt-3 fw-bold">Sherina T. &mdash; Sunset Cafe, Bali</div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                <div class="card my-3">
-                    <div class="card-body">
-                        Saya bisa mengecek kondisi keuangan toko saya tanpa perlu datang
-                        ke toko.
-                        <div class="mt-3 fw-bold">Billy W. &mdash; Toko Bintang Lima, Surabaya</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--                <div class="card my-3">--}}
+{{--                    <div class="card-body">--}}
+{{--                        Saya bisa mengecek kondisi keuangan toko saya tanpa perlu datang--}}
+{{--                        ke toko.--}}
+{{--                        <div class="mt-3 fw-bold">Billy W. &mdash; Toko Bintang Lima, Surabaya</div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="row">
             <div class="col-md-6">
