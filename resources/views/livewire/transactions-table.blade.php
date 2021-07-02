@@ -1,8 +1,6 @@
 <div>
     <div class="my-3 bg-white d-flex">
         <div class="btn-group me-auto">
-            <a href="#" class="btn btn-outline-secondary">Omset Pendapatan</a>
-            <a href="#" class="btn btn-outline-secondary">Laba Rugi</a>
         </div>
         <div class="btn-group">
             <button class="btn btn-outline-secondary" wire:click="toggleFilters">{{ $showFilters ? 'Sembunyikan' : 'Tampilkan' }} Filter</button>

@@ -22,7 +22,8 @@
             <div class="btn-group">
                 <a href="{{ route('stores::edit', [$store]) }}" class="btn btn-outline-secondary">Edit Bisnis</a>
                 <a href="{{ route('stores::categories::index', [$store]) }}" class="btn btn-outline-secondary">Kategori</a>
-                <a href="{{ route('stores::income::index', [$store]) }}" class="btn btn-outline-secondary">Omset Pendapatan</a>
+                <a href="{{ route('stores::income::index', [$store]) }}" class="btn btn-outline-secondary">Pendapatan</a>
+                <a href="{{ route('stores::income::index', [$store]) }}" class="btn btn-outline-secondary">Laba Rugi</a>
             </div>
         </div>
 
