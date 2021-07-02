@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class IncomeRecord extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'store_id', 'date', 'amount'
+    ];
 }

@@ -12,65 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
 
-                <div class="my-3">
-                    <div class="btn-group">
-                        <button class="btn btn-primary">Tambah Transaksi</button>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn btn-outline-secondary">Filter</button>
-                    </div>
-                </div>
-
-                <div class="my-3 card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <select name="day" id="day" class="form-control">
-                                    @for($i=1;$i<=31;$i++)<option value="{{ $i }}" {{ now()->day == $i ? 'selected' : "" }}>{{ $i }}</option>@endfor
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select name="month" id="month" class="form-control">
-                                    @for($i=1;$i<=12;$i++)<option value="{{ $i }}" {{ $month == $i ? 'selected' : "" }}>{{ now()->startOfMonth()->month($i)->localeMonth }}</option>@endfor
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select name="year" id="year" class="form-control">
-                                    @for($i=2010;$i<=now()->year;$i++)<option value="{{ $i }}" {{ $year == $i ? 'selected' : "" }}>{{ $i }}</option>@endfor
-                                </select>
-                            </div>
-                            <div class="col-md-12 my-3">
-                                <div class="input-group">
-                                    <div class="input-group-text">Rp</div>
-                                    <input type="number" class="form-control" name="amount" placeholder="Jumlah">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-primary">Tambahkan</button>
-                    </div>
-                </div>
-
-                <div class="my-3 card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <select name="month" id="month" class="form-control">
-                                    @for($i=1;$i<=12;$i++)<option value="{{ $i }}" {{ $month == $i ? 'selected' : "" }}>{{ now()->startOfMonth()->month($i)->localeMonth }}</option>@endfor
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <select name="year" id="year" class="form-control">
-                                    @for($i=2010;$i<=now()->year;$i++)<option value="{{ $i }}" {{ $year == $i ? 'selected' : "" }}>{{ $i }}</option>@endfor
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <button class="btn btn-secondary">Filter</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <livewire:income-record-form :store="$store" :day="now()->day" :month="$month" :year="$year" />
 
                 <div class="bg-white table-responsive">
                     <table class="table">
@@ -95,6 +37,9 @@
                         </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="my-3 text-muted text-center small">
+                    Untuk mengubah transaksi, pilih tanggal dari transaksi yang ingin diubah pada form diatas.
                 </div>
             </div>
         </div>

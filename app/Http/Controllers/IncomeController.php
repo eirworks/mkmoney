@@ -17,6 +17,7 @@ class IncomeController extends Controller
             ->get();
 
         return view('income_records.index', [
+            'store' => $store,
             'records' => $records,
             'month' => $month,
             'year' => $year,
