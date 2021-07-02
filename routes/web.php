@@ -42,5 +42,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => '{store}/categories', 'as' => 'categories::'], function() {
             Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('index');
         });
+
+        Route::group(['prefix' => '{store}/income', 'as' => 'income::'], function() {
+            Route::get('/', [\App\Http\Controllers\IncomeController::class, 'index'])->name('index');
+        });
     });
 });

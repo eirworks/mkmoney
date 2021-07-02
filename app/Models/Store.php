@@ -35,4 +35,9 @@ class Store extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    public function incomeRecords()
+    {
+        return $this->hasMany(IncomeRecord::class);
+    }
 }
