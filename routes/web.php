@@ -48,5 +48,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => '{store}/income', 'as' => 'income::'], function() {
             Route::get('/', [\App\Http\Controllers\IncomeController::class, 'index'])->name('index');
         });
+
+        Route::group(['prefix' => '{store}/reports', 'as' => 'reports::'], function() {
+            Route::get('/income', [\App\Http\Controllers\ReportController::class, 'incomeStatement'])->name('income');
+        });
     });
 });
