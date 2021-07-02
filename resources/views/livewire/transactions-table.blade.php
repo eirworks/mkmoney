@@ -1,13 +1,14 @@
 <div>
-    <div class="my-3 bg-white d-flex">
-        <div class="btn-group me-auto">
-        </div>
+    <div class="my-3 bg-white d-print-none">
         <div class="btn-group">
             <button class="btn btn-outline-secondary" wire:click="toggleFilters">{{ $showFilters ? 'Sembunyikan' : 'Tampilkan' }} Filter</button>
         </div>
+        <div class="btn-group">
+            <a href="{{ route('stores::reports::expenditure', [$store, 'month' => $filterMonth, 'year' => $filterYear]) }}" class="btn btn-outline-secondary">Grafik</a>
+        </div>
     </div>
     @if($showFilters)
-        <div class="card">
+        <div class="card d-print-none">
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-2">
@@ -42,6 +43,7 @@
             </div>
         </div>
     @endif
+    <div class="my-3 text-center h2 d-print-block d-none">Laporan Pengeluaran {{ $store->name }}</div>
     <div class="bg-white my-3 table-responsive">
         <table class="table">
             <thead class="bg-primary text-white">

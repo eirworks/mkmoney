@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="container">
-        <ul class="breadcrumb justify-content-center">
+        <ul class="breadcrumb justify-content-center d-print-none">
             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dasbor</a></li>
             <li class="breadcrumb-item"><a href="{{ route('stores::index') }}">Bisnisku</a></li>
             <li class="breadcrumb-item"><a href="{{ route('stores::show', [$store]) }}">{{ $store->name }}</a></li>
@@ -17,8 +17,9 @@
 
         <div class="row justify-content-center">
             <div class="col-md-6">
-
-                <livewire:income-record-form :store="$store" :day="now()->day" :month="$month" :year="$year" />
+                <div class="my-3 d-print-none">
+                    <livewire:income-record-form :store="$store" :day="now()->day" :month="$month" :year="$year" />
+                </div>
 
                 <div class="bg-white table-responsive">
                     <table class="table">
@@ -44,7 +45,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="my-3 text-muted text-center small">
+                <div class="my-3 text-muted text-center d-print-none"><button class="btn btn-outline-secondary" onclick="window.print()">Cetak</button></div>
+                <div class="my-3 text-muted text-center small d-print-none">
                     Untuk mengubah transaksi, pilih tanggal dari transaksi yang ingin diubah pada form diatas.
                 </div>
             </div>

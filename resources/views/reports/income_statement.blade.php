@@ -6,12 +6,21 @@
 
 @section('content')
     <div class="container">
+        <ul class="breadcrumb justify-content-center d-print-none">
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dasbor</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('stores::index') }}">Bisnisku</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('stores::show', [$store]) }}">{{ $store->name }}</a></li>
+            <li class="breadcrumb-item">@yield('title')</li>
+        </ul>
         <h2 class="text-center">@yield('title')</h2>
         <div class="my-3 h4 text-center">
             {{ $store->name }}
         </div>
         <div class="my-3 text-center">
             Tanggal {{ \Illuminate\Support\Carbon::simpleDate(now()) }}
+        </div>
+        <div class="my-3 text-center d-print-none">
+            <button class="btn btn-outline-secondary" onclick="window.print()">Cetak</button>
         </div>
 
         <div class="row justify-content-center">

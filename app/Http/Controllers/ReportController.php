@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use Faker\Generator;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    use WithFaker;
+
+    public function __construct() {
+        $this->setUpFaker();
+    }
+
     public function incomeStatement(Store $store, Request $request)
     {
         $month = $request->input('month', now()->month);
@@ -36,6 +44,35 @@ class ReportController extends Controller
             'categories' => $cats,
             'income' => $incomeSum,
             'total' => $total,
+        ]);
+    }
+
+    public function statExpenditure(Store $store, Request $request) {
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
+        $categories = $store->categories()->get();
+        $cats = [];
+
+        foreach($categories as $category)
+        {
+            $cats[] = [
+                'sum' => $category->transactions()
+                    ->whereMonth('created_at', $month)
+                    ->whereYear('created_at', $year)
+                    ->sum('amount'),
+                'category' => $category,
+                'color' => $this->faker->rgbCssColor,
+            ];
+        }
+
+        debug($cats);
+
+        return view('reports.expenditure_stats', [
+            'categories' => $cats,
+            'store' => $store,
+            'month' => $month,
+            'year' => $year
         ]);
     }
 }
