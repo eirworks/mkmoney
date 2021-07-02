@@ -24,7 +24,8 @@ class IncomeRecordFactory extends Factory
         return [
             'store_id' => 1,
             'date' => now(),
-            'amount' => rand(1, 9) * rand(1,8) * 1000
+            'amount' => rand(1, 9) * rand(1,8) * 1000,
+            'user_id' => 1,
         ];
     }
 }

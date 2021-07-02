@@ -18,6 +18,7 @@ class CreateIncomeRecordsTable extends Migration
             $table->bigInteger('store_id')->index();
             $table->date('date')->index();
             $table->decimal('amount', 14, 2);
+            $table->bigInteger('user_id')->index();
             $table->timestamps();
         });
     }

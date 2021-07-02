@@ -12,4 +12,9 @@ class IncomeRecord extends Model
     protected $fillable = [
         'store_id', 'date', 'amount'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

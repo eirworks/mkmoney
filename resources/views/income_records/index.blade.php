@@ -27,7 +27,8 @@
                         <tr>
                             <th>No</th>
                             <th>Tanggal</th>
-                            <th>Jumlah</th>
+                            <th>Penanggung Jawab</th>
+                            <th class="text-end">Jumlah</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,11 +36,12 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ \Illuminate\Support\Carbon::simpleDate($record->date) }}</td>
+                                <td>{{ $record->user->name }}</td>
                                 <td class="text-end">{{ \Illuminate\Support\Str::currency($record->amount, 'Rp') }}</td>
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="2" class="fw-bold text-end">Total</td>
+                            <td colspan="3" class="fw-bold text-end">Total</td>
                             <td class="fw-bold text-end">{{ \Illuminate\Support\Str::currency($records->sum('amount'), 'Rp') }}</td>
                         </tr>
                         </tbody>

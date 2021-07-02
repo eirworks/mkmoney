@@ -14,6 +14,7 @@ class IncomeController extends Controller
 
         $records = $store->incomeRecords()->whereMonth('date', $month)
             ->whereYear('date', $year)
+            ->with(['user'])
             ->get();
 
         return view('income_records.index', [
