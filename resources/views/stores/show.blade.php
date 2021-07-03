@@ -11,7 +11,7 @@
             <li class="breadcrumb-item"><a href="{{ route('stores::index') }}">Bisnisku</a></li>
             <li class="breadcrumb-item">@yield('title')</li>
         </ul>
-        <h2 class="d-none">@yield('title')</h2>
+        <h2 class="d-print-none">@yield('title')</h2>
         <div class="my-2 text-muted small d-print-none">
             ID: #{{ $store->id }}
             Dibuat pada {{ \Illuminate\Support\Carbon::simpleDatetime($store->created_at) }}

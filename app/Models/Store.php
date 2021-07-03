@@ -22,8 +22,17 @@ class Store extends Model
         ];
     }
 
+    public function getTypeNameAttribute()
+    {
+        return self::types()[$this->type] ?? "?";
+    }
+
     protected $fillable = [
         'name', 'type'
+    ];
+
+    protected $appends = [
+        'type_name'
     ];
 
     public function transactions()
