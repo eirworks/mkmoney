@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use Carbon\CarbonPeriod;
 use Faker\Generator;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Request;
@@ -70,6 +71,24 @@ class ReportController extends Controller
 
         return view('reports.expenditure_stats', [
             'categories' => $cats,
+            'store' => $store,
+            'month' => $month,
+            'year' => $year
+        ]);
+    }
+
+    public function statIncome(Request $request, Store $store)
+    {
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
+        $records = $store->incomeRecords()
+            ->whereMonth('date', $month)
+            ->whereYear('date', $year)
+            ->get();
+
+        return view('reports.income_stats', [
+            'records' => $records,
             'store' => $store,
             'month' => $month,
             'year' => $year

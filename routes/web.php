@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => '{store}/reports', 'as' => 'reports::'], function() {
             Route::get('/income', [\App\Http\Controllers\ReportController::class, 'incomeStatement'])->name('income');
             Route::get('/stats/expenditure', [\App\Http\Controllers\ReportController::class, 'statExpenditure'])->name('expenditure');
+            Route::get('/stats/income', [\App\Http\Controllers\ReportController::class, 'statIncome'])->name('income::stat');
         });
     });
 });
