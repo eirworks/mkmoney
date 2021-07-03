@@ -50,16 +50,24 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $store = new Store($request->only(['name', 'type']));
-        $store->image = "";
-
+        $store->image = $request->file('image')->store('stores/logo');
+        $store->user_id = auth()->id();
         $store->save();
+
+        return redirect()->route('stores::show', [
+            $store,
+        ]);
     }
 
     public function update(Request $request, Store $store)
     {
         $store->fill($request->only(['name', 'type']));
-        $store->image = "";
-                $store->save();
+        $store->image = $request->file('image')->store('stores/logo');
+        $store->save();
+
+        return redirect()->route('stores::show', [
+            $store,
+        ]);
     }
 
     public function setDefaultStore(Store $store)

@@ -18,25 +18,39 @@
             <div class="col-md-6">
                 <h2 class="text-center">@yield('title')</h2>
 
-                <form action="{{ $store->id ? route('stores::update', [$store]) : route('stores::store') }}" method="post">
+                <form action="{{ $store->id ? route('stores::update', [$store]) : route('stores::store') }}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @if($store->id)
+                        @method('put')
+                    @endif
 
                     <div class="mb-3">
                         <label for="name">Nama Bisnis</label>
-                        <input type="text" class="form-control" placeholder="Nama usaha anda">
+                        <input type="text" name="name" dusk="name" class="form-control" placeholder="Nama usaha anda">
                     </div>
 
                     <div class="mb-3">
                         <label for="name">Bentuk usaha</label>
-                        <select name="type" id="type" class="form-control">
+                        <select name="type" id="type" dusk="type" class="form-control">
                             @foreach(\App\Models\Store::types() as $type => $name)
                                 <option value="{{ $type }}">{{ $name }}</option>
                             @endforeach
                         </select>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="name">Logo</label>
+                        @if($store->image)
+                            <div class="my-2">
+                                <img src="{{ \Illuminate\Support\Facades\Storage::url($store->image) }}"
+                                     alt="Gambar {{ $store->name }}">
+                            </div>
+                        @endif
+                        <input type="file" name="image" dusk="image" class="form-control">
+                    </div>
+
                     <div class="mb-3 text-center">
-                        <button class="btn btn-primary">Simpan</button>
+                        <button class="btn btn-primary" dusk="submit">Simpan</button>
                     </div>
                 </form>
             </div>
