@@ -46,6 +46,19 @@ class User extends Authenticatable
 
     const MAX_STORE = 3;
 
+    public static function roles()
+    {
+        return [
+            self::ROLE_USER => "Pengguna",
+            self::ROLE_ADMIN => "Admin",
+        ];
+    }
+
+    public function getRoleNameAttribute()
+    {
+        return self::roles()[$this->role] ?? "?";
+    }
+
     public function currentStore()
     {
         return $this->belongsTo(Store::class, 'store_id');

@@ -49,4 +49,9 @@ class Store extends Model
     {
         return $this->hasMany(IncomeRecord::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,20 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/income', [\App\Http\Controllers\ReportController::class, 'incomeStatement'])->name('income');
             Route::get('/stats/expenditure', [\App\Http\Controllers\ReportController::class, 'statExpenditure'])->name('expenditure');
             Route::get('/stats/income', [\App\Http\Controllers\ReportController::class, 'statIncome'])->name('income::stat');
+        });
+    });
+
+    Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function() {
+        Route::get('/', [AdminDashboard::class, 'index'])->name('dashboard');
+
+        Route::group(['prefix' => 'users', 'as' => 'users::'], function() {
+            Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
+            Route::get('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('show');
+        });
+
+        Route::group(['prefix' => 'stores', 'as' => 'stores::'], function() {
+            Route::get('/', [\App\Http\Controllers\Admin\StoreController::class, 'index'])->name('index');
+            Route::get('/{store}', [\App\Http\Controllers\Admin\StoreController::class, 'show'])->name('show');
         });
     });
 });

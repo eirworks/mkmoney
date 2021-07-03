@@ -26,7 +26,7 @@
 
                     <div class="mb-3">
                         <label for="name">Nama Bisnis</label>
-                        <input type="text" name="name" dusk="name" class="form-control" placeholder="Nama usaha anda">
+                        <input type="text" name="name" dusk="name" class="form-control" placeholder="Nama usaha anda" value="{{ $store->name }}">
                     </div>
 
                     <div class="mb-3">
