@@ -11,9 +11,11 @@
                 </li>
             </ul>
             <ul class="navbar-nav">
+                @if(auth()->user()->role == \App\Models\User::ROLE_ADMIN)
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Akunku</a>
+                    <a href="{{ route('admin::dashboard') }}" class="nav-link">Admin</a>
                 </li>
+                @endif
                 <li class="nav-item">
                     <button type="submit" class="btn btn-link nav-link" form="logout">Keluar</button>
                 </li>
