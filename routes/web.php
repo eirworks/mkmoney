@@ -19,6 +19,7 @@ Route::get('/', [\App\Http\Controllers\LandingController::class, 'index'])->name
 Route::group(['namespace' => 'Auth', 'as' => 'auth::'], function() {
     Route::group(['middleware' => 'guest'], function() {
         Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login');
+        Route::get('forgot-password', [\App\Http\Controllers\Auth\LoginController::class, 'forgotPassword'])->name('forgot-password');
         Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'submitLogin'])->name('login::submit');
         Route::get('register', [\App\Http\Controllers\Auth\RegisterController::class, 'index'])->name('register');
         Route::post('register', [\App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register::submit');
@@ -68,6 +69,11 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => 'stores', 'as' => 'stores::'], function() {
             Route::get('/', [\App\Http\Controllers\Admin\StoreController::class, 'index'])->name('index');
             Route::get('/{store}', [\App\Http\Controllers\Admin\StoreController::class, 'show'])->name('show');
+        });
+
+        Route::group(['prefix' => 'settings', 'as' => 'settings::'], function() {
+            Route::get('/', [\App\Http\Controllers\Admin\SettingsController::class, 'index'])->name('index');
+            Route::put('/', [\App\Http\Controllers\Admin\SettingsController::class, 'update'])->name('update');
         });
     });
 });

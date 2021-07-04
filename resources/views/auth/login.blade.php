@@ -30,6 +30,10 @@
                 <div class="my-5 text-center">
                     <a href="{{ route('auth::register') }}">Belum punya akun?</a>
                 </div>
+
+                <div class="my-5 text-center">
+                    <a href="{{ route('auth::forgot-password') }}">Lupa kata sandi?</a>
+                </div>
             </div>
         </div>
     </div>

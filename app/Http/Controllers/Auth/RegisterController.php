@@ -11,6 +11,10 @@ class RegisterController extends Controller
 {
     public function index()
     {
+        if (!setting('enable_registration', true))
+        {
+            abort(502,"Maaf, fitur pendaftaran pengguna dinonaktifkan");
+        }
         return view('auth.register');
     }
 

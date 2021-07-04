@@ -29,10 +29,10 @@ class DashboardController extends Controller
                 'name' => "Kelola Bisnis",
                 'url' => route('admin::stores::index'),
             ],
-//            [
-//                'name' => "Pengaturan",
-//                'url' => "#",
-//            ],
+            [
+                'name' => "Pengaturan",
+                'url' => route('admin::settings::index'),
+            ],
         ];
     }
 }
