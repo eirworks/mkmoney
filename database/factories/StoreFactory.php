@@ -26,6 +26,7 @@ class StoreFactory extends Factory
             'image' => '',
             'type' => Store::TYPE_SHOP,
             'user_id' => 1,
+            'settings' => [],
         ];
     }
 }

@@ -11,7 +11,7 @@ class TransactionInput extends Component
     public $info = "";
     public $amount = 0;
     public $qty = 1;
-    public $unit = 1;
+    public $unit = "";
     public $category_id = 0;
 
     public Store $store;

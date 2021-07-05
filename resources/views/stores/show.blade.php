@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="my-3">
-                    <livewire:my-current-store />
+                    <livewire:my-current-store :store="$store" />
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@ class TransactionFactory extends Factory
             'amount' => rand(1, 99) * 1000,
             'shop' => 'Toko '.$this->faker->streetName,
             'qty' => $this->faker->boolean ? 1 : rand(1, 3),
-            'unit' => 1,
+            'unit' => 'unit',
         ];
     }
 }

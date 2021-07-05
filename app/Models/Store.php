@@ -31,6 +31,10 @@ class Store extends Model
         'name', 'type'
     ];
 
+    protected $casts = [
+        'settings' => 'collection'
+    ];
+
     protected $appends = [
         'type_name'
     ];
