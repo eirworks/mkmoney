@@ -10,7 +10,7 @@
             Selamat datang, {{ auth()->user()->name }}
         </div>
         <div class="mb-3">
-            <livewire:my-current-store />
+            <livewire:my-current-store show-links header />
         </div>
         <div class="my-3">
             <h3>Bisnisku</h3>

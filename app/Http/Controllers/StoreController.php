@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Store;
 use App\Models\User;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+    use WithFaker;
+
+    public function __construct() {
+        $this->setUpFaker();
+    }
+
     public function index(Request $request)
     {
         $stores = auth()->user()->stores()->latest('updated_at')->paginate();
@@ -19,14 +26,17 @@ class StoreController extends Controller
         ]);
     }
 
-    public function show(Store $store)
+    public function show(Store $store, Request $request)
     {
-        $transactions = $store->transactions()
-            ->limit(25)->latest('id')->get();
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
 
         return view('stores.show', [
             'store' => $store,
-            'transactions' => $transactions,
+            'categories' => $this->statExpenditure($store, $request),
+            'records' => $this->statIncome($store, $request),
+            'month' => $month,
+            'year' => $year,
         ]);
     }
 
@@ -77,5 +87,40 @@ class StoreController extends Controller
 
         return redirect()->route('stores::index')
             ->with('success', $store->name." telah dijadikan bisnis utama.");
+    }
+
+    private function statExpenditure(Store $store, Request $request) {
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
+        $categories = $store->categories()->get();
+        $cats = [];
+
+        foreach($categories as $category)
+        {
+            $cats[] = [
+                'sum' => $category->transactions()
+                    ->whereMonth('created_at', $month)
+                    ->whereYear('created_at', $year)
+                    ->sum('amount'),
+                'category' => $category,
+                'color' => $this->faker->rgbCssColor,
+            ];
+        }
+
+        return $cats;
+    }
+
+    private function statIncome(Store $store, Request $request)
+    {
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
+        $records = $store->incomeRecords()
+            ->whereMonth('date', $month)
+            ->whereYear('date', $year)
+            ->get();
+
+        return $records;
     }
 }

@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Transaction;
 use Livewire\Component;
 
 class MyCurrentStore extends Component
 {
     public $store = null;
+    public bool $showLinks = false;
+    public bool $header = false;
 
     public function mount()
     {
@@ -15,6 +18,21 @@ class MyCurrentStore extends Component
 
     public function render()
     {
-        return view('livewire.my-current-store');
+        $total = Transaction::where('store_id', $this->store['id'])
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->sum('amount');
+
+        $transactions = Transaction::where('store_id', $this->store['id'])
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->latest('id')
+            ->take(5)
+            ->get();
+
+        return view('livewire.my-current-store', [
+            'transactions' => $transactions,
+            'total' => $total,
+        ]);
     }
 }

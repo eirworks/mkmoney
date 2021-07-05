@@ -51,6 +51,10 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/', [\App\Http\Controllers\IncomeController::class, 'index'])->name('index');
         });
 
+        Route::group(['prefix' => '{store}/expenditures', 'as' => 'expenditures::'], function() {
+            Route::get('/', [\App\Http\Controllers\ExpenditureController::class, 'index'])->name('index');
+        });
+
         Route::group(['prefix' => '{store}/reports', 'as' => 'reports::'], function() {
             Route::get('/income', [\App\Http\Controllers\ReportController::class, 'incomeStatement'])->name('income');
             Route::get('/stats/expenditure', [\App\Http\Controllers\ReportController::class, 'statExpenditure'])->name('expenditure');

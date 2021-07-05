@@ -35,7 +35,7 @@
                                 <tbody>
                                 @foreach($stores as $store)
                                     <tr>
-                                        <td><a href="{{ route('stores::show', [$store]) }}">{{ $store->name }}</a></td>
+                                        <td><a href="{{ route('admin::stores::show', [$store]) }}">{{ $store->name }}</a></td>
                                         <td>{{ $store->transactions_count }}</td>
                                         <td>{{ \Illuminate\Support\Carbon::simpleDate($store->created_at) }}</td>
                                     </tr>
@@ -43,7 +43,7 @@
                                 </tbody>
                             </table>
                             <div class="card-footer">
-                                <a href="#">Semua Bisnis</a>
+                                <a href="{{ route('admin::stores::index') }}">Semua Bisnis</a>
                             </div>
                         </div>
                     </div>
