@@ -7,6 +7,7 @@
         <div class="btn-group">
             <button class="btn btn-outline-secondary" wire:click="$toggle('showFilter')">Filter</button>
             <a href="{{ route('stores::reports::income::stat', [$store]) }}" class="btn btn-outline-secondary">Grafik</a>
+            <a href="{{ route('stores::income::createCsv', [$store]) }}" class="btn btn-outline-secondary">Upload CSV</a>
         </div>
     </div>
 
