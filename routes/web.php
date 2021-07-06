@@ -55,6 +55,8 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::group(['prefix' => '{store}/expenditures', 'as' => 'expenditures::'], function() {
             Route::get('/', [\App\Http\Controllers\ExpenditureController::class, 'index'])->name('index');
+            Route::get('/csv', [\App\Http\Controllers\ExpenditureController::class, 'createCsv'])->name('createCsv');
+            Route::post('/csv', [\App\Http\Controllers\ExpenditureController::class, 'storeCsv'])->name('storeCsv');
         });
 
         Route::group(['prefix' => '{store}/reports', 'as' => 'reports::'], function() {

@@ -5,6 +5,7 @@
         </div>
         <div class="btn-group">
             <a href="{{ route('stores::reports::expenditure', [$store, 'month' => $filterMonth, 'year' => $filterYear]) }}" class="btn btn-outline-secondary">Grafik</a>
+            <a href="{{ route('stores::expenditures::createCsv', [$store]) }}" class="btn btn-outline-secondary">Upload CSV</a>
         </div>
     </div>
     @if($showFilters)

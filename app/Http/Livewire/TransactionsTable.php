@@ -10,6 +10,8 @@ use Livewire\WithPagination;
 class TransactionsTable extends Component
 {
     use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public Store $store;
     public int $limit = 25;
     public bool $showFilters = false;
