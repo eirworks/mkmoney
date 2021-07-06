@@ -52,12 +52,14 @@ class ProcessIncomeCSV implements ShouldQueue
 
                 if ($existingDate) {
                     \Log::debug("Existing #".$existingDate->id);
-                    $existingDate->amount = $line[1];
+                    $existingDate->amount = $line[2];
+                    $existingDate->name = $line[1];
                     $existingDate->save();
                 } else {
                     $existingDate = new IncomeRecord([
                         'date' => $date,
-                        'amount' => $line[1],
+                        'amount' => $line[2],
+                        'name' => $line[1],
                     ]);
                     $existingDate->store_id = $this->store->id;
                     $existingDate->user_id = $this->userId;

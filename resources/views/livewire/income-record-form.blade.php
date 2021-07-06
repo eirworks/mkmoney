@@ -30,11 +30,14 @@
                         @for($i=2010;$i<=now()->year;$i++)<option value="{{ $i }}" {{ $year == $i ? 'selected' : "" }}>{{ $i }}</option>@endfor
                     </select>
                 </div>
-                <div class="col-md-12 my-3">
+                <div class="col-md-6 my-3">
                     <div class="input-group">
                         <div class="input-group-text">Rp</div>
                         <input type="number" min="0" class="form-control" name="amount" placeholder="Jumlah" wire:model.defer="amount">
                     </div>
+                </div>
+                <div class="col-md-6 my-3">
+                    <input type="text" name="name" placeholder="Nama pencatat" class="form-control" wire:model.defer="name">
                 </div>
             </div>
         </div>

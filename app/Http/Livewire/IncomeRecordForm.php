@@ -18,6 +18,7 @@ class IncomeRecordForm extends Component
     public $month = 0;
     public $year = 0;
     public $amount = 0;
+    public $name = "";
 
     public function submitTransaction()
     {
@@ -32,6 +33,7 @@ class IncomeRecordForm extends Component
                 'store_id' => $this->store->id,
                 'date' => $date,
                 'amount' => $this->amount,
+                'name' => $this->name,
             ]);
             $trx->save();
         } else {
@@ -39,6 +41,7 @@ class IncomeRecordForm extends Component
                 'store_id' => $this->store->id,
                 'date' => $date,
                 'amount' => $this->amount,
+                'name' => $this->name,
             ]);
             $trx->save();
         }

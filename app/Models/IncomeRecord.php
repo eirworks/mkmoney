@@ -10,7 +10,7 @@ class IncomeRecord extends Model
     use HasFactory;
 
     protected $fillable = [
-        'store_id', 'date', 'amount'
+        'store_id', 'date', 'amount', 'name'
     ];
 
     public function user()

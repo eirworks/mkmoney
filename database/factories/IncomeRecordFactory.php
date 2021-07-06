@@ -26,6 +26,7 @@ class IncomeRecordFactory extends Factory
             'date' => now(),
             'amount' => rand(1, 99) * 1000,
             'user_id' => 1,
+            'name' => $this->faker->firstNameFemale,
         ];
     }
 }

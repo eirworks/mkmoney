@@ -36,7 +36,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ \Illuminate\Support\Carbon::simpleDate($record->date) }}</td>
-                                <td>{{ $record->user->name }}</td>
+                                <td>{{ $record->name }}</td>
                                 <td class="text-end">{{ \Illuminate\Support\Str::currency($record->amount, 'Rp') }}</td>
                             </tr>
                         @endforeach
