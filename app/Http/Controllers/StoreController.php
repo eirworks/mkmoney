@@ -60,8 +60,13 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         $store = new Store($request->only(['name', 'type']));
-        $store->image = $request->file('image')->store('stores/logo');
+        if ($request->hasFile('image')) {
+            $store->image = $request->file('image')->store('stores/logo');
+        } else {
+            $store->image = "";
+        }
         $store->user_id = auth()->id();
+        $store->settings = [];
         $store->save();
 
         return redirect()->route('stores::show', [
@@ -72,7 +77,11 @@ class StoreController extends Controller
     public function update(Request $request, Store $store)
     {
         $store->fill($request->only(['name', 'type']));
-        $store->image = $request->file('image')->store('stores/logo');
+        if ($request->hasFile('image')) {
+            $store->image = $request->file('image')->store('stores/logo');
+        } else {
+            $store->image = "";
+        }
         $store->save();
 
         return redirect()->route('stores::show', [
