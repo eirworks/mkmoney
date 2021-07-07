@@ -43,6 +43,7 @@ class IncomeRecordForm extends Component
                 'amount' => $this->amount,
                 'name' => $this->name,
             ]);
+            $trx->user_id = auth()->id();
             $trx->save();
         }
 

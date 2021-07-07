@@ -13,6 +13,10 @@ class IncomeRecord extends Model
         'store_id', 'date', 'amount', 'name'
     ];
 
+    protected $casts = [
+        'date' => 'date'
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -54,7 +54,7 @@
         var chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [{!! collect($records)->map(function($record) { return "'".$record->created_at->format('d/m')."'"; })->join(',') !!}],
+                labels: [{!! collect($records)->map(function($record) { return "'".$record->date->format('d M')."'"; })->join(',') !!}],
                 datasets: [
                     {
                         label: "Pemasukan {{ now()->startOfMonth()->month($month)->englishMonth }} {{ $year }}",
