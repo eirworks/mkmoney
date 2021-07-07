@@ -21,6 +21,10 @@
         <div class="my-3">
             <livewire:transactions-table :store="$store" />
         </div>
+
+        <div class="my-5">
+            <a href="{{ route('stores::expenditures::delete', [$store]) }}" class="text-danger small">Hapus transaksi</a>
+        </div>
     </div>
 @endsection
 

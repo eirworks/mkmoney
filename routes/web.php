@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/', [\App\Http\Controllers\ExpenditureController::class, 'index'])->name('index');
             Route::get('/csv', [\App\Http\Controllers\ExpenditureController::class, 'createCsv'])->name('createCsv');
             Route::post('/csv', [\App\Http\Controllers\ExpenditureController::class, 'storeCsv'])->name('storeCsv');
+            Route::get('/delete', [\App\Http\Controllers\ExpenditureController::class, 'deleteTransactions'])->name('delete');
+            Route::delete('/delete', [\App\Http\Controllers\ExpenditureController::class, 'destroyTransactions'])->name('delete::submit');
         });
 
         Route::group(['prefix' => '{store}/reports', 'as' => 'reports::'], function() {
