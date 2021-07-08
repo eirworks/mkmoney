@@ -9,7 +9,7 @@ before_script:
   - touch storage/data.db
   - php artisan migrate:fresh --seed
   - php artisan dusk:install
-  - php artisan dusk:chrome-driver
+  - php artisan dusk:chrome-driver --detect
 
 script:
   - vendor/bin/phpunit
