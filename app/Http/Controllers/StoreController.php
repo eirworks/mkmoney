@@ -113,7 +113,7 @@ class StoreController extends Controller
                     ->whereYear('created_at', $year)
                     ->sum('amount'),
                 'category' => $category,
-                'color' => $this->faker->rgbCssColor,
+                'color' => $category->color,
             ];
         }
 
