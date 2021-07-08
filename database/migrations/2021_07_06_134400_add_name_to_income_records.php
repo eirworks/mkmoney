@@ -14,7 +14,7 @@ class AddNameToIncomeRecords extends Migration
     public function up()
     {
         Schema::table('income_records', function (Blueprint $table) {
-            $table->string('name');
+            $table->string('name')->default("");
         });
     }
 

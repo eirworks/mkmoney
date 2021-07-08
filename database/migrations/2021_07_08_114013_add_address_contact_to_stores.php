@@ -14,9 +14,9 @@ class AddAddressContactToStores extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->string('address');
-            $table->string('phone');
-            $table->string('email');
+            $table->string('address')->default('');
+            $table->string('phone')->default('');
+            $table->string('email')->default('');
         });
     }
 
