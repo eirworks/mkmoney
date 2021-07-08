@@ -6,8 +6,10 @@ before_script:
   - travis_retry composer install --no-interaction
   - cp .env.example .env
   - php artisan key:generate
+  - touch ~/data.db
   - php artisan migrate:fresh --seed
+  - php artisan serve
 
 script:
-  - php artisan dusk
   - vendor/bin/phpunit
+  - php artisan dusk
