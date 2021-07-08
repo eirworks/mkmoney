@@ -15,6 +15,10 @@
                 </div>
                 <div class="row g-3 align-items-end">
                     <div class="col-md-3">
+                        <label for="store">Tanggal Pembelian</label>
+                        <input type="date" class="form-control" placeholder="Tanggal Pembelian" wire:model.defer="purchased_at">
+                    </div>
+                    <div class="col-md-3">
                         <label for="store">Nama Toko</label>
                         <input type="text" class="form-control" placeholder="Beli dimana?" wire:model.defer="shop">
                     </div>

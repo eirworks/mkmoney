@@ -66,7 +66,7 @@
             @if($transactions->count() > 0)
                 @foreach($transactions as $transaction)
                     <tr>
-                        <td><button class="btn btn-link text-dark p-0 m-0" wire:click="$set('transactionSelected', '{{ $transaction->id }}')">{{ \Illuminate\Support\Carbon::simpleDate($transaction->created_at) }}</button></td>
+                        <td><button class="btn btn-link text-dark p-0 m-0" wire:click="$set('transactionSelected', '{{ $transaction->id }}')">{{ \Illuminate\Support\Carbon::simpleDate($transaction->purchased_at) }}</button></td>
                         <td>{{ $transaction->shop }}</td>
                         <td>{{ $transaction->info }}</td>
                         <td><button class="btn btn-link p-0 m-0" wire:click="setCategory({{ $transaction->category_id }})">{{ $transaction->category->name }}</button></td>
@@ -79,7 +79,8 @@
                         @if(!$modeEdit)
                             <tr>
                                 <td colspan="8">
-                                    <span class="text-muted">ID: {{ $transaction->id }}</span>
+                                    <span class="text-muted me-2">ID: {{ $transaction->id }}</span>
+                                    <span class="text-muted me-2">Tanggal: {{ \Illuminate\Support\Carbon::simpleDatetime($transaction->created_at) }}</span>
                                     <div class="btn-group">
                                         <button class="btn m-0 p-0 mx-2 btn-link text-dark" wire:click="$set('transactionSelected', '0')">Tutup</button>
                                         <button class="btn m-0 p-0 mx-2 btn-link" wire:click="openEditForm({{ $transaction->id }})">Edit</button>

@@ -13,10 +13,16 @@ class TransactionInput extends Component
     public $qty = 1;
     public $unit = "";
     public $category_id = 0;
+    public $purchased_at = "";
 
     public Store $store;
 
     public bool $showForm = true;
+
+    public function mount()
+    {
+        $this->purchased_at = now()->format('d-m-y');
+    }
 
     public function submitTransaction()
     {
@@ -39,6 +45,7 @@ class TransactionInput extends Component
             'unit' => $this->unit,
             'amount' => $this->amount,
             'category_id' => $this->category_id,
+            'purchased_at' => $this->purchased_at,
         ]);
 
         $this->emit('transactionAdded', $transaction->id);
@@ -53,6 +60,7 @@ class TransactionInput extends Component
         $this->category_id = 0;
         $this->unit = 1;
         $this->qty = 1;
+        $this->purchased_at = now()->format('d-m-y');
     }
 
     public function toggleForm()

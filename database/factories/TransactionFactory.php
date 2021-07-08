@@ -29,6 +29,7 @@ class TransactionFactory extends Factory
             'shop' => 'Toko '.$this->faker->streetName,
             'qty' => $this->faker->boolean ? 1 : rand(1, 3),
             'unit' => 'unit',
+            'purchased_at' => now(),
         ];
     }
 }

@@ -11,7 +11,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'info', 'amount', 'category_id',
-        'shop', 'qty', 'unit'
+        'shop', 'qty', 'unit', 'purchased_at'
     ];
 
     public function category() {
