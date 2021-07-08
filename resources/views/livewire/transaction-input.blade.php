@@ -37,9 +37,9 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <label for="amount">Satuan Barang (Gram/Liter,dll)</label>
+                        <label for="amount">Satuan Barang</label>
                         <div class="input-group">
-                            <input type="number" min="0" wire:model.defer="unit" class="form-control" placeholder="Satuan">
+                            <input type="text" wire:model.defer="unit" class="form-control" placeholder="Gram, Liter, dsb">
                         </div>
                     </div>
                     <div class="col-md-3">
