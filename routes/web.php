@@ -45,6 +45,13 @@ Route::group(['middleware' => 'auth'], function() {
 
         Route::group(['prefix' => '{store}/categories', 'as' => 'categories::'], function() {
             Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('index');
+            Route::get('/new', [\App\Http\Controllers\CategoryController::class, 'create'])->name('create');
+            Route::post('/new', [\App\Http\Controllers\CategoryController::class, 'store'])->name('store');
+            Route::get('/{category}', [\App\Http\Controllers\CategoryController::class, 'show'])->name('show');
+            Route::get('/{category}/edit', [\App\Http\Controllers\CategoryController::class, 'edit'])->name('edit');
+            Route::put('/{category}/edit', [\App\Http\Controllers\CategoryController::class, 'update'])->name('update');
+            Route::get('/{category}/delete', [\App\Http\Controllers\CategoryController::class, 'destroy'])->name('destroy');
+            Route::delete('/{category}/delete', [\App\Http\Controllers\CategoryController::class, 'confirmDestroy'])->name('confirmDestroy');
         });
 
         Route::group(['prefix' => '{store}/income', 'as' => 'income::'], function() {

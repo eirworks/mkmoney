@@ -20,11 +20,11 @@ class SiteSettings
                 'default' => '',
                 'type' => 'string',
             ],
-//            [
-//                'key' => 'enable_registration',
-//                'default' => true,
-//                'type' => 'bool',
-//            ],
+            [
+                'key' => 'site_name',
+                'default' => 'App',
+                'type' => 'string',
+            ],
         ];
     }
 }

@@ -18,9 +18,14 @@ class CategorySeeder extends Seeder
         Category::truncate();
 
         Store::all()->each(function($store) {
-            Category::factory()->count(5)->create([
-                'store_id' => $store->id,
-            ]);
+            $cats = ['bahan baku', 'maintenance', 'biaya', 'sewa', 'piutang'];
+            foreach($cats as $cat) {
+                Category::factory()->create([
+                    'store_id' => $store->id,
+                    'name' => ucwords($cat),
+                    'description' => "Kategori ".ucwords($cat)." untuk ".$store->name,
+                ]);
+            }
         });
     }
 }

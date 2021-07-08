@@ -16,7 +16,9 @@
         <h2>@yield('title')</h2>
 
         <div class="my-3">
-            <livewire:category-form :store="$store" />
+            <div class="btn-group">
+                <a href="{{ route('stores::categories::store', [$store]) }}" class="btn btn-primary">Tambah Kategori</a>
+            </div>
         </div>
 
         <div class="bg-white table-responsive">
@@ -30,7 +32,10 @@
                 <tbody>
                 @foreach($categories as $category)
                     <tr>
-                        <td>{{ $category->name }}</td>
+                        <td>
+                            <span style="color: {{ $category->color ?? 'blue' }};">&#9679;</span>
+                            <a href="{{ route('stores::categories::show', [$store, $category]) }}">{{ $category->name }}</a>
+                        </td>
                         <td class="text-muted">{{ $category->description }}</td>
                     </tr>
                 @endforeach
