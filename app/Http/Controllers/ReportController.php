@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Faker\Generator;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -40,11 +41,18 @@ class ReportController extends Controller
 
         $total = $incomeSum - collect($cats)->sum('sum');
 
+        $start = Carbon::create($year, $month)->startOfMonth();
+        $end = Carbon::create($year, $month)->endOfMonth();
+
         return view('reports.income_statement', [
             'store' => $store,
             'categories' => $cats,
             'income' => $incomeSum,
             'total' => $total,
+            'month' => $month,
+            'year' => $year,
+            'start' => $start,
+            'end' => $end,
         ]);
     }
 

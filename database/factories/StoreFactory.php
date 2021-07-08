@@ -26,6 +26,9 @@ class StoreFactory extends Factory
             'image' => '',
             'type' => Store::TYPE_SHOP,
             'user_id' => 1,
+            'address' => $this->faker->address,
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->email,
             'settings' => [],
         ];
     }
