@@ -14,7 +14,7 @@ class AddSettingsToStores extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->json('settings');
+            $table->json('settings')->default("{}");
         });
     }
 
