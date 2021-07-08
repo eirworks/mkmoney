@@ -6,7 +6,7 @@ before_script:
   - travis_retry composer install --no-interaction
   - cp .env.example .env
   - php artisan key:generate
-  - touch ~/data.db
+  - touch storage/data.db
   - php artisan migrate:fresh --seed
   - php artisan serve
 
