@@ -8,6 +8,7 @@ before_script:
   - php artisan key:generate
   - touch storage/data.db
   - php artisan migrate:fresh --seed
+  - php artisan dusk:install
 
 script:
   - vendor/bin/phpunit
