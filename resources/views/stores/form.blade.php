@@ -39,6 +39,21 @@
                     </div>
 
                     <div class="mb-3">
+                        <label>Alamat Email</label>
+                        <input type="email" name="email" dusk="email" class="form-control" placeholder="Email" value="{{ $store->email }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label>No HP</label>
+                        <input type="tel" name="phone" dusk="phone" class="form-control" placeholder="No Hp" value="{{ $store->phone }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name">Alamat</label>
+                        <input type="text" name="address" dusk="address" class="form-control" placeholder="Alamat" value="{{ $store->address }}">
+                    </div>
+
+                    <div class="mb-3">
                         <label for="name">Logo</label>
                         @if($store->image)
                             <div class="my-2">

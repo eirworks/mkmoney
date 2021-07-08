@@ -28,7 +28,7 @@ class Store extends Model
     }
 
     protected $fillable = [
-        'name', 'type'
+        'name', 'type', 'phone', 'email', 'address'
     ];
 
     protected $casts = [

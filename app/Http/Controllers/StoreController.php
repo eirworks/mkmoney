@@ -59,7 +59,7 @@ class StoreController extends Controller
 
     public function store(Request $request)
     {
-        $store = new Store($request->only(['name', 'type']));
+        $store = new Store($request->only(['name', 'type', 'address', 'phone', 'email']));
         if ($request->hasFile('image')) {
             $store->image = $request->file('image')->store('stores/logo');
         } else {
@@ -76,7 +76,7 @@ class StoreController extends Controller
 
     public function update(Request $request, Store $store)
     {
-        $store->fill($request->only(['name', 'type']));
+        $store->fill($request->only(['name', 'type', 'address', 'phone', 'email']));
         if ($request->hasFile('image')) {
             $store->image = $request->file('image')->store('stores/logo');
         } else {
