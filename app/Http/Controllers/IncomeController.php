@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadCsvRequest;
 use App\Jobs\ProcessIncomeCSV;
 use App\Models\IncomeRecord;
 use App\Models\Store;
@@ -34,15 +35,10 @@ class IncomeController extends Controller
         ]);
     }
 
-    public function storeCsv(Request $request, Store $store)
+    public function storeCsv(UploadCsvRequest $request, Store $store)
     {
-        if ($request->hasFile('csv')) {
-            if ($request->file('csv')->isValid()) {
-                $filepath = $request->file('csv')->store('csv');
-
-                ProcessIncomeCSV::dispatch($filepath, $store, auth()->id());
-            }
-        }
+        $filepath = $request->file('csv')->store('csv');
+        ProcessIncomeCSV::dispatch($filepath, $store, auth()->id());
 
         return redirect()->route('stores::income::index', [$store])
             ->with('success', "CSV dalam proses");

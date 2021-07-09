@@ -20,17 +20,19 @@ class ProcessIncomeCSV implements ShouldQueue
     private string $filename;
     private Store $store;
     private int $userId;
+    private string $delimiter;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(string $filename, Store $store, int $userId)
+    public function __construct(string $filename, Store $store, int $userId, $delimiter = ',')
     {
         $this->filename = $filename;
         $this->store = $store;
         $this->userId = $userId;
+        $this->delimiter = $delimiter;
     }
 
     /**
@@ -43,7 +45,7 @@ class ProcessIncomeCSV implements ShouldQueue
         $content = \Storage::get($this->filename);
         collect(explode("\n", $content))
             ->reject(function($line) { return empty($line);})
-            ->map(function($line) { return str_getcsv($line); })
+            ->map(function($line) { return str_getcsv($line, $this->delimiter); })
             ->each(function($line) {
                 $date = Carbon::parse($line[0]);
                 $existingDate = IncomeRecord::where('store_id', $this->store->id)
