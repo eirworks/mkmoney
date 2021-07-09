@@ -14,7 +14,7 @@ class AddPurchaseDateToTransactions extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->date('purchased_at')->default('');
+            $table->date('purchased_at');
         });
     }
 
