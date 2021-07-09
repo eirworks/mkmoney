@@ -1,12 +1,21 @@
 language: php
+sudo: true
 php:
   - '7.4'
+services:
+  - mysql
 before_script:
+  - wget https://repo.mysql.com//mysql-apt-config_0.8.10-1_all.deb
+  - sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb
+  - sudo apt-get update -q
+  - sudo apt-get install -q -y --allow-unauthenticated -o Dpkg::Options::=--force-confnew mysql-server
+  - sudo systemctl restart mysql
+  - sudo mysql_upgrade
+  - mysql --version
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction
-  - cp .env.example .env
+  - cp .env.test .env
   - php artisan key:generate
-  - touch storage/data.db
   - php artisan migrate:fresh --seed
   - php artisan dusk:install
   - php artisan dusk:chrome-driver --detect
