@@ -24,7 +24,9 @@
         <div class="row">
             <div class="col-md-6">
                 <form action="{{ $category->id ? route('stores::categories::update', [$store, $category]) : route('stores::categories::create', [$store]) }}" method="post">
-                    @method('put')
+                    @if($category->id)
+                        @method('put')
+                    @endif
                     @csrf
                     <div class="card">
                         <div class="card-body">

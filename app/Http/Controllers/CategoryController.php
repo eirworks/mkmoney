@@ -49,6 +49,7 @@ class CategoryController extends Controller
     public function store(Request $request, Store $store)
     {
         $category = new Category($request->only(['name', 'description', 'color']));
+        $category->store_id = $store->id;
         $category->save();
 
         return redirect()->route('stores::categories::show', [$store, $category]);
