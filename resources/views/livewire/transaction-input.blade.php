@@ -10,9 +10,6 @@
         <div class="card">
         @if($showForm)
             <div class="card-body">
-                <div class="float-end">
-                    <button type="button" class="btn btn-link p-0 m-0 btn-sm" wire:click="toggleForm">Tutup</button>
-                </div>
                 <div class="row g-3 align-items-end">
                     <div class="col-md-3">
                         <label for="store">Tanggal Pembelian</label>
