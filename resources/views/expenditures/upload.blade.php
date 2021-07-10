@@ -25,7 +25,7 @@
                                 <input type="file" name="csv" class="form-control">
                             </div>
                             <div class="text-muted">
-                                File harus berformat CSV, maksimal 2MB.
+                                File harus berformat Excel atau CSV, maksimal 2MB.
                             </div>
                         </div>
                         <div class="card-footer">

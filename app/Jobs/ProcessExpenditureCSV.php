@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Imports\ExpenditureImport;
 use App\Models\Category;
 use App\Models\Store;
 use App\Models\Transaction;
@@ -13,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProcessExpenditureCSV implements ShouldQueue
 {
@@ -39,29 +41,33 @@ class ProcessExpenditureCSV implements ShouldQueue
      */
     public function handle()
     {
-        $content = \Storage::get($this->filename);
-        collect(explode("\n", $content))
-            ->reject(function($line) { return empty($line);})
-            ->map(function($line) { return str_getcsv($line); })
-            ->each(function($line) {
-                \Log::debug("Line", [$line]);
+//        $content = \Storage::get($this->filename);
+        $import = new ExpenditureImport();
+        $import->setStoreId($this->store->id);
+        Excel::import($import, $this->filename);
 
-                $category = $this->getOrCreateCategory($line[6], $this->store);
-
-                $trx = new Transaction([
-                    'created_at' => $line[0],
-                    'shop' => $line[1],
-                    'info' => $line[2],
-                    'amount' => $line[3],
-                    'qty' => $line[4],
-                    'unit' => $line[5],
-                    'category_id' => $category->id,
-                ]);
-                $trx->store_id = $this->store->id;
-                $trx->save();
-
-                \Log::debug("Added transaction ".$trx->id);
-            });
+//        collect(explode("\n", $content))
+//            ->reject(function($line) { return empty($line);})
+//            ->map(function($line) { return str_getcsv($line); })
+//            ->each(function($line) {
+//                \Log::debug("Line", [$line]);
+//
+//                $category = $this->getOrCreateCategory($line[6], $this->store);
+//
+//                $trx = new Transaction([
+//                    'created_at' => $line[0],
+//                    'shop' => $line[1],
+//                    'info' => $line[2],
+//                    'amount' => $line[3],
+//                    'qty' => $line[4],
+//                    'unit' => $line[5],
+//                    'category_id' => $category->id,
+//                ]);
+//                $trx->store_id = $this->store->id;
+//                $trx->save();
+//
+//                \Log::debug("Added transaction ".$trx->id);
+//            });
 
     }
 
