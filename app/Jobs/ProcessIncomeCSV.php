@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Imports\IncomeImport;
 use App\Models\IncomeRecord;
 use App\Models\Store;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProcessIncomeCSV implements ShouldQueue
 {
@@ -42,32 +44,37 @@ class ProcessIncomeCSV implements ShouldQueue
      */
     public function handle()
     {
-        $content = \Storage::get($this->filename);
-        collect(explode("\n", $content))
-            ->reject(function($line) { return empty($line);})
-            ->map(function($line) { return str_getcsv($line, $this->delimiter); })
-            ->each(function($line) {
-                $date = Carbon::parse($line[0]);
-                $existingDate = IncomeRecord::where('store_id', $this->store->id)
-                    ->where('date', '=', $date)
-                    ->first();
+//        $content = \Storage::get($this->filename);
+        $importObject = new IncomeImport();
+        $importObject->setStoreId($this->store->id);
+        $importObject->setUserId($this->userId);
+        Excel::import($importObject, $this->filename);
 
-                if ($existingDate) {
-                    \Log::debug("Existing #".$existingDate->id);
-                    $existingDate->amount = $line[2];
-                    $existingDate->name = $line[1];
-                    $existingDate->save();
-                } else {
-                    $existingDate = new IncomeRecord([
-                        'date' => $date,
-                        'amount' => $line[2],
-                        'name' => $line[1],
-                    ]);
-                    $existingDate->store_id = $this->store->id;
-                    $existingDate->user_id = $this->userId;
-                    $existingDate->save();
-                }
-                \Log::debug("Saved income record #".$existingDate->id);
-            });
+//        collect(explode("\n", $content))
+//            ->reject(function($line) { return empty($line);})
+//            ->map(function($line) { return str_getcsv($line, $this->delimiter); })
+//            ->each(function($line) {
+//                $date = Carbon::parse($line[0]);
+//                $existingDate = IncomeRecord::where('store_id', $this->store->id)
+//                    ->where('date', '=', $date)
+//                    ->first();
+//
+//                if ($existingDate) {
+//                    \Log::debug("Existing #".$existingDate->id);
+//                    $existingDate->amount = $line[2];
+//                    $existingDate->name = $line[1];
+//                    $existingDate->save();
+//                } else {
+//                    $existingDate = new IncomeRecord([
+//                        'date' => $date,
+//                        'amount' => $line[2],
+//                        'name' => $line[1],
+//                    ]);
+//                    $existingDate->store_id = $this->store->id;
+//                    $existingDate->user_id = $this->userId;
+//                    $existingDate->save();
+//                }
+//                \Log::debug("Saved income record #".$existingDate->id);
+//            });
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Upload CSV untuk Rekap Pendapatan
+    Upload Rekap Pendapatan
 @endsection
 
 @section('content')
@@ -24,7 +24,7 @@
                                 <input type="file" name="csv" class="form-control">
                             </div>
                             <div class="text-muted small">
-                                File harus berformat CSV, maksimal 2MB.
+                                File harus berformat Excel, Open Document Sheet, atau CSV, maksimal 2MB.
                             </div>
                         </div>
                         <div class="card-footer">
