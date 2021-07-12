@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -25,5 +26,14 @@ class UserController extends Controller
         return view('admin.users.show', [
             'user' => $user,
         ]);
+    }
+
+    public function resetPassword(User $user)
+    {
+        $user->password = Hash::make("123456");
+        $user->save();
+
+        return redirect()->route('admin::users::show', [$user])
+            ->with('success', "Kata sandi pengguna telah direset!");
     }
 }

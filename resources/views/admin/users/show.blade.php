@@ -18,6 +18,14 @@
             <span class="me-2">Terakhir diubah: {{ \Illuminate\Support\Carbon::simpleDatetime($user->updated_at) }}</span>
         </div>
 
+        <div class="my-3">
+            <button class="btn btn-outline-secondary" form="reset-password" onclick="return confirm('Anda yakin ingin me-reset kata sandi pengguna ini?')">Reset Kata Sandi</button>
+        </div>
+
+        <form action="{{ route('admin::users::resetPassword', [$user]) }}" id="reset-password" method="post">
+            @csrf
+        </form>
+
         <div class="row">
             <div class="col-md-6">
                 <div class="card my-3">

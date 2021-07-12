@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => 'users', 'as' => 'users::'], function() {
             Route::get('/', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('index');
             Route::get('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('show');
+            Route::post('/{user}', [\App\Http\Controllers\Admin\UserController::class, 'resetPassword'])->name('resetPassword');
         });
 
         Route::group(['prefix' => 'stores', 'as' => 'stores::'], function() {
