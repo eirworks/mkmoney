@@ -87,7 +87,7 @@
                         <td class="text-end text-success">{{ \Illuminate\Support\Str::currency($income, 'Rp') }}</td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="fw-bold">Biaya Operasional:</td>
+                        <td colspan="3" class="fw-bold">Biaya-biaya:</td>
                     </tr>
                     @foreach($categories as $cat)
                     <tr>
@@ -97,7 +97,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td class="fw-bold">Total Biaya Operasional</td>
+                        <td class="fw-bold">Total Biaya</td>
                         <td></td>
                         <td class="text-end text-danger">{{ \Illuminate\Support\Str::currency(collect($categories)->sum('sum') * -1, 'Rp') }}</td>
                     </tr>
