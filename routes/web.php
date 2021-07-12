@@ -34,6 +34,12 @@ Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'ind
 ->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function() {
+
+    Route::group(['prefix' => 'profile', 'as' => 'profile::'], function() {
+        Route::get('/', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('edit');
+        Route::post('/', [\App\Http\Controllers\ProfileController::class, 'update'])->name('update');
+    });
+
     Route::group(['prefix' => 'stores', 'as' => 'stores::'], function() {
         Route::get('/', [\App\Http\Controllers\StoreController::class, 'index'])->name('index');
         Route::get('/new', [\App\Http\Controllers\StoreController::class, 'create'])->name('create');
