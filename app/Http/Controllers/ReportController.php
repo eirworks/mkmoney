@@ -28,8 +28,8 @@ class ReportController extends Controller
             $cats[] = [
                 'category' => $category,
                 'sum' => $category->transactions()
-                    ->whereMonth('created_at', $month)
-                    ->whereYear('created_at', $year)
+                    ->whereMonth('purchased_at', $month)
+                    ->whereYear('purchased_at', $year)
                     ->sum('amount'),
             ];
         }

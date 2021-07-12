@@ -107,8 +107,8 @@ class TransactionsTable extends Component
     public function render()
     {
         $transactions = $this->store->transactions()
-            ->whereMonth('created_at',$this->filterMonth)
-            ->whereYear('created_at',$this->filterYear)
+            ->whereMonth('purchased_at',$this->filterMonth)
+            ->whereYear('purchased_at',$this->filterYear)
             ->when($this->filterCategory > 0, function($query) {
                 $query->where('category_id', $this->filterCategory);
             })
@@ -116,8 +116,8 @@ class TransactionsTable extends Component
             ->paginate($this->limit);
 
         $total = $this->store->transactions()
-            ->whereMonth('created_at',$this->filterMonth)
-            ->whereYear('created_at',$this->filterYear)
+            ->whereMonth('purchased_at',$this->filterMonth)
+            ->whereYear('purchased_at',$this->filterYear)
             ->when($this->filterCategory > 0, function($query) {
                 $query->where('category_id', $this->filterCategory);
             })
