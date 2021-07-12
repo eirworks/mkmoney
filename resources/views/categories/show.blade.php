@@ -25,7 +25,7 @@
         </div>
         <div class="my-3">
             <a href="{{ route('stores::categories::edit', [$store, $category]) }}" class="btn btn-primary">Edit</a>
-{{--            <a href="{{ route('stores::categories::destroy', [$store, $category]) }}" class="btn btn-outline-danger">Hapus</a>--}}
+            <a href="{{ route('stores::categories::destroy', [$store, $category]) }}" class="btn btn-outline-danger">Hapus</a>
         </div>
     </div>
 @endsection

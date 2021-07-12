@@ -65,11 +65,27 @@ class CategoryController extends Controller
 
     public function destroy(Store $store, Category $category)
     {
-
+        $category->loadCount('transactions');
+        $otherCategories = $store->categories()->where('id', '<>', $category->id)
+            ->get();
+        return view('categories.delete', [
+            'store' => $store,
+            'category' => $category,
+            'other_categories' => $otherCategories,
+        ]);
     }
 
-    public function confirmDestroy(Store $store, Category $category)
+    public function confirmDestroy(Request $request, Store $store, Category $category)
     {
+        if ($request->input('delete_effect') == 'move_transactions') {
+            $category->transactions()->update(['category_id' => $request->input('category_target')]);
+        }
+        else {
+            $category->transactions()->delete();
+        }
+        $category->delete();
 
+        return redirect()->route('stores::categories::index', [$store])
+            ->with('success', "Kategori telah dihapus");
     }
 }
