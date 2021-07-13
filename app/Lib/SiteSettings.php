@@ -21,6 +21,11 @@ class SiteSettings
                 'type' => 'string',
             ],
             [
+                'key' => 'contact_email',
+                'default' => 'support@example.com',
+                'type' => 'string',
+            ],
+            [
                 'key' => 'site_name',
                 'default' => 'App',
                 'type' => 'string',
