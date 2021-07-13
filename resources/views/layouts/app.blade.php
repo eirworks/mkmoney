@@ -16,6 +16,7 @@
     <main class="app-main">
         @yield('content')
     </main>
+    <footer class="my-5"></footer>
     <script src="{{ asset('js/app.js') }}"></script>
     @livewireScripts
     @stack('bottom')

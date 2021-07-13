@@ -20,6 +20,17 @@
                 </div>
             </div>
             <div class="col-md-10">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <livewire:admin-stats stat="{{ \App\Models\Store::class }}" />
+                    </div>
+                    <div class="col-md-4">
+                        <livewire:admin-stats stat="" />
+                    </div>
+                    <div class="col-md-4">
+                        <livewire:admin-stats stat="{{ \App\Models\Transaction::class }}" />
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card">
