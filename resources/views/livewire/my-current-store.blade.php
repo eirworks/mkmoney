@@ -14,7 +14,6 @@
             <table class="table">
                 <thead class="bg-primary text-white">
                 <tr>
-                    <th>ID</th>
                     <th>Tanggal</th>
                     <th>Keterangan</th>
                     <th>Kategori</th>
@@ -26,7 +25,6 @@
                 <tbody>
                 @foreach($transactions as $transaction)
                     <tr>
-                        <td>{{ $transaction->id }}</td>
                         <td>{{ \Illuminate\Support\Carbon::simpleDate($transaction->created_at) }}</td>
                         <td>{{ $transaction->info }}</td>
                         <td>{{ $transaction->category->name }}</td>
@@ -36,7 +34,7 @@
                     </tr>
                 @endforeach
                 <tr class="bg-light">
-                    <td colspan="6" class="fw-bold text-end">Total</td>
+                    <td colspan="5" class="fw-bold text-end">Total</td>
                     <td class="fw-bold text-success">{{ \Illuminate\Support\Str::currency($total, "Rp") }}</td>
                 </tr>
                 </tbody>
