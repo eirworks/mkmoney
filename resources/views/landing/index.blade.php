@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <header class="bg-primary text-white pb-5">
+    <header class="landing-header-bg text-white pb-5">
         <div class="text-center h1 pt-5 pb-5">Solusi Keuangan untuk UMKM</div>
         <div class="text-center h4 fw-light">
             Kelola keuangan bisnis anda dengan mudah, dimanapun, kapanpun.

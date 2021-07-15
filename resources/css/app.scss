@@ -4,3 +4,15 @@
 main.app-main {
     min-height: 500px;
 }
+
+.site-title {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 1.75rem;
+}
+.landing-header-bg {
+    //background: rgb(13,110,253);
+    //background: linear-gradient(180deg, rgba(13,110,253,1) 0%, rgba(53,135,255,1) 100%);
+
+    background: rgb(0,79,196);
+    background: linear-gradient(180deg, rgba(0,79,196,1) 0%, rgba(53,135,255,1) 100%);
+}
