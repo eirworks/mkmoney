@@ -21,7 +21,7 @@ class TransactionSeeder extends Seeder
         Transaction::truncate();
 
         Store::all()->each(function($store) {
-            $cats = $store->categories()->pluck('id')->toArray();
+            $cats = $store->categories()->where('parent_id', 0)->pluck('id')->toArray();
             for($i=3; $i>=0; $i--) {
                 for($day=0;$day<=3; $day++) {
                     Transaction::factory()->count(3)->create([

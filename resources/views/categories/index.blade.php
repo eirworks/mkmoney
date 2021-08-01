@@ -26,6 +26,7 @@
                 <thead>
                 <tr>
                     <th>Nama Kategori</th>
+                    <th>Sub Kategori dari</th>
                     <th>Deskripsi</th>
                 </tr>
                 </thead>
@@ -34,7 +35,12 @@
                     <tr>
                         <td>
                             <span style="color: {{ $category->color ?? 'blue' }};">&#9679;</span>
-                            <a href="{{ route('stores::categories::show', [$store, $category]) }}">{{ $category->name }}</a>
+                            <a class="{{ $category->parent_id == 0 ? 'fw-bold' : '' }}" href="{{ route('stores::categories::show', [$store, $category]) }}">{{ $category->name }}</a>
+                        </td>
+                        <td>
+                            @if($category->parent_id > 0)
+                                <a href="{{ route('stores::categories::show', [$store, $category->parent_id]) }}">{{ $category->parent->name }}</a>
+                            @endif
                         </td>
                         <td class="text-muted">{{ $category->description }}</td>
                     </tr>

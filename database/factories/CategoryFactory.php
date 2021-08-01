@@ -26,6 +26,7 @@ class CategoryFactory extends Factory
             'name' => $this->faker->safeColorName,
             'description' => $this->faker->sentences(3, true),
             'color' => $this->faker->hexColor,
+            'parent_id' => 0,
         ];
     }
 }
