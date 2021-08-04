@@ -32,4 +32,13 @@ class TransactionFactory extends Factory
             'purchased_at' => now(),
         ];
     }
+
+    public function expenditure()
+    {
+        return $this->state(function() {
+            return [
+                'amount' => rand(1, 99) * 1000 * -1,
+            ];
+        });
+    }
 }

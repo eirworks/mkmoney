@@ -15,6 +15,24 @@ class IncomeController extends Controller
         $month = $request->input('month', now()->month);
         $year = $request->input('year', now()->year);
 
+        $records = $store->transactions()->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->where('amount', '>', 0)
+            ->get();
+
+        return view('income_records.index', [
+            'store' => $store,
+            'month' => $month,
+            'year' => $year,
+            'records' => $records,
+        ]);
+    }
+
+    public function recapitulation(Request $request, Store $store)
+    {
+        $month = $request->input('month', now()->month);
+        $year = $request->input('year', now()->year);
+
         $records = $store->incomeRecords()->whereMonth('date', $month)
             ->whereYear('date', $year)
             ->with(['user'])

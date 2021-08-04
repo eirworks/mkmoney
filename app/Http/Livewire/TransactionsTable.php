@@ -15,6 +15,7 @@ class TransactionsTable extends Component
     public Store $store;
     public int $limit = 25;
     public bool $showFilters = false;
+    public bool $expenditure = false;
 
     public int $filterYear;
     public int $filterMonth;
@@ -107,6 +108,11 @@ class TransactionsTable extends Component
     public function render()
     {
         $transactions = $this->store->transactions()
+            ->when($this->expenditure, function($q) {
+                $q->where('amount', '<=', 0);
+            }, function($q) {
+                $q->where('amount', '>', 0);
+            })
             ->whereMonth('purchased_at',$this->filterMonth)
             ->whereYear('purchased_at',$this->filterYear)
             ->when($this->filterCategory > 0, function($query) {
@@ -118,6 +124,11 @@ class TransactionsTable extends Component
         $total = $this->store->transactions()
             ->whereMonth('purchased_at',$this->filterMonth)
             ->whereYear('purchased_at',$this->filterYear)
+            ->when($this->expenditure, function($q) {
+                $q->where('amount', '<=', 0);
+            }, function($q) {
+                $q->where('amount', '>', 0);
+            })
             ->when($this->filterCategory > 0, function($query) {
                 $query->where('category_id', $this->filterCategory);
             })

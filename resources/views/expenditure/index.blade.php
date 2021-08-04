@@ -19,7 +19,7 @@
         </div>
 
         <div class="my-3">
-            <livewire:transactions-table :store="$store" />
+            <livewire:transactions-table :store="$store" :expenditure="true" />
         </div>
 
         <div class="my-5">

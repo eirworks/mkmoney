@@ -72,8 +72,8 @@
                         <td><button class="btn btn-link p-0 m-0" wire:click="setCategory({{ $transaction->category_id }})">{{ $transaction->category->name }}</button></td>
                         <td>{{ $transaction->qty }}</td>
                         <td>{{ $transaction->unit }}</td>
-                        <td class="text-end">{{ \Illuminate\Support\Str::currency($transaction->amount, 'Rp') }}</td>
-                        <td class="text-end">{{ \Illuminate\Support\Str::currency($transaction->amount * $transaction->qty, 'Rp') }}</td>
+                        <td class="text-end">{{ \Illuminate\Support\Str::currency(abs($transaction->amount), 'Rp') }}</td>
+                        <td class="text-end">{{ \Illuminate\Support\Str::currency(abs($transaction->amount * $transaction->qty), 'Rp') }}</td>
                     </tr>
                     @if($transactionSelected == $transaction->id)
                         @if(!$modeEdit)
@@ -117,7 +117,7 @@
             @endif
             <tr class="bg-light">
                 <td colspan="7" class="fw-bold text-end">Total</td>
-                <td class="fw-bold text-end">{{ \Illuminate\Support\Str::currency($total, "Rp") }}</td>
+                <td class="fw-bold text-end">{{ \Illuminate\Support\Str::currency(abs($total), "Rp") }}</td>
             </tr>
             </tbody>
         </table>

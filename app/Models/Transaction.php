@@ -14,6 +14,10 @@ class Transaction extends Model
         'shop', 'qty', 'unit', 'purchased_at'
     ];
 
+    protected $casts = [
+        'purchased_at' => 'datetime',
+    ];
+
     public function category() {
         return $this->belongsTo(Category::class);
     }
