@@ -64,7 +64,7 @@
                     <div class="row g-3 align-items-end">
                         <div class="col-md-3">
                             <label for="store">Tanggal Pembelian</label>
-                            <input type="date" class="form-control" placeholder="Tanggal Pembelian" wire:model.defer="purchased_at">
+                            <input type="date" id="purchased_at" class="form-control" placeholder="Tanggal Pembelian" wire:model.defer="purchased_at">
                         </div>
                         <div class="col-md-3">
                             <select name="category_id" id="category_id" class="form-control" wire:model.defer="category_id">
@@ -82,18 +82,18 @@
                             <label for="amount">Harga Satuan</label>
                             <div class="input-group">
                                 <div class="input-group-text">Rp</div>
-                                <input type="number" class="form-control" placeholder="Jumlah" wire:model.defer="amount">
+                                <input type="number" id="amount" class="form-control" placeholder="Jumlah" wire:model.defer="amount">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="amount">Jumlah Barang</label>
                             <div class="input-group">
                                 <div class="input-group-text">Qty</div>
-                                <input type="number" min="1" wire:model.defer="qty" class="form-control" placeholder="Berapa banyak?">
+                                <input type="number" id="qty" min="1" wire:model.defer="qty" class="form-control" placeholder="Berapa banyak?">
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <button class="btn btn-primary" wire:click="submitTransaction">Tambahkan</button>
+                            <button class="btn btn-primary" dusk="submit_trx" wire:click="submitTransaction">Tambahkan</button>
                         </div>
                         <div class="col-md-3">
                             <div class="text-muted" wire:loading wire:target="submitTransaction">Tunggu sebentar...</div>

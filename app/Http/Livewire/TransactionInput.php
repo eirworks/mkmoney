@@ -33,10 +33,12 @@ class TransactionInput extends Component
             return;
         }
 
-        if (empty($this->shop) || empty($this->info))
-        {
-            $this->emit('error:invalid_inputs');
-            return;
+        if ($this->expenditure) {
+            if (empty($this->shop) || empty($this->info))
+            {
+                $this->emit('error:invalid_inputs');
+                return;
+            }
         }
 
         $transaction = $this->store->transactions()->create([
@@ -61,7 +63,7 @@ class TransactionInput extends Component
         $this->category_id = 0;
         $this->unit = 1;
         $this->qty = 1;
-        $this->purchased_at = now()->format('d-m-y');
+        $this->purchased_at = now()->format('Y-m-d');
     }
 
     public function toggleForm()
