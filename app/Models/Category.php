@@ -49,7 +49,7 @@ class Category extends Model
         return $this->hasMany(Transaction::class);
     }
 
-    public function children()
+    public function subcategories()
     {
         return $this->hasMany(Category::class, 'parent_id');
     }

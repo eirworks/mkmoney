@@ -18,10 +18,11 @@ class TransactionInput extends Component
     public Store $store;
 
     public bool $showForm = true;
+    public bool $expenditure = false;
 
     public function mount()
     {
-        $this->purchased_at = now()->format('d-m-y');
+        $this->purchased_at = now()->format('Y-m-d');
     }
 
     public function submitTransaction()
@@ -70,8 +71,16 @@ class TransactionInput extends Component
 
     public function render()
     {
+        $parentCategories = $this->store->categories()
+            ->orderBy('name', 'asc')
+            ->select(['id', 'name'])
+            ->onlyParent()
+            ->where('is_expenditure', $this->expenditure)
+            ->with(['subcategories:id,name,parent_id'])
+            ->get();
+
         return view('livewire.transaction-input', [
-            'categories' => $this->store->categories()->orderBy('name', 'asc')->select(['id', 'name'])->get(),
+            'categories' => $parentCategories,
         ]);
     }
 }

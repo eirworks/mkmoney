@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="my-3 d-print-none">
-                    <livewire:income-record-form :store="$store" :day="now()->day" :month="$month" :year="$year" />
+                    <livewire:transaction-input :store="$store" :day="now()->day" :month="$month" :year="$year" :expenditure="false" />
                 </div>
 
                 <livewire:transactions-table :store="$store" />
