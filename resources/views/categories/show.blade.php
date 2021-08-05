@@ -15,6 +15,9 @@
         </ul>
         <h2><span style="color: {{ $category->color ?? 'blue' }};">&#9679;</span> @yield('title')</h2>
         <div class="my-3 text-muted">
+            @if($category->parent_id)
+                <span class="me-2">Subkategori: <a href="{{ route('stores::categories::show', [$store, $category->parent_id]) }}">{{ $category->parent->name ?? "?" }}</a></span>
+            @endif
             Dibuat pada {{ \Illuminate\Support\Carbon::simpleDatetime($category->created_at) }}
             <span class="mx-3">
                 {{ $category->transactions_count }} transaksi dalam kategori ini

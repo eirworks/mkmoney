@@ -26,6 +26,7 @@ class CategoryController extends Controller
     public function show(Store $store, Category $category)
     {
         $category->loadCount(['transactions']);
+        $category->load(['parent']);
 
         return view('categories.show', [
             'store' => $store,
@@ -51,9 +52,15 @@ class CategoryController extends Controller
 
     public function edit(Store $store, Category $category)
     {
+        $parentCategories = $store->categories()
+            ->onlyParent()
+            ->where('is_expenditure', $category->is_expenditure)
+            ->get();
+
         return view('categories.form', [
             'store' => $store,
             'category' => $category,
+            'parent_categories' => $parentCategories,
         ]);
     }
 

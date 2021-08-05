@@ -33,9 +33,9 @@
                             <div class="mb-3">
                                 <label for="parent_id">Pilih Kategori Utama</label>
                                 <select dusk="parent_id" name="parent_id" id="parent_id" class="form-control">
-                                    <option value="0">- Tanpa Kategori Utama -</option>
+                                    <option {{ $category->parent_id == 0 ? 'selected' : '' }} value="0">- Tanpa Kategori Utama -</option>
                                     @foreach($parent_categories as $parent_category)
-                                        <option value="{{ $parent_category->id }}">{{ $parent_category->name }}</option>
+                                        <option {{ $category->parent_id == $parent_category->id ? 'selected' : '' }} value="{{ $parent_category->id }}">{{ $parent_category->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
