@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index(Store $store)
+    public function index(Store $store, Request $request)
     {
         $categories = $store->categories()->latest('id')
             ->with(['parent'])
+            ->when($request->filled('type'), function($q) use($request) {
+                $q->where('is_expenditure', $request->input('type') == 'expenditure');
+            })
             ->paginate(25);
 
         return view('categories.index', [
@@ -30,12 +33,18 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function create(Store $store)
+    public function create(Store $store, Request $request)
     {
         $category = new Category();
+        $parentCategories = $store->categories()
+            ->onlyParent()
+            ->where('is_expenditure', $request->input('type') == 'expenditure')
+            ->get();
+
         return view('categories.form', [
             'store' => $store,
             'category' => $category,
+            'parent_categories' => $parentCategories,
         ]);
     }
 
@@ -50,7 +59,7 @@ class CategoryController extends Controller
 
     public function store(Request $request, Store $store)
     {
-        $category = new Category($request->only(['name', 'description', 'color']));
+        $category = new Category($request->only(['name', 'description', 'color', 'parent_id']));
         $category->store_id = $store->id;
         $category->save();
 
@@ -59,7 +68,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, Store $store, Category $category)
     {
-        $category->fill($request->only(['name', 'description', 'color']));
+        $category->fill($request->only(['name', 'description', 'color', 'parent_id']));
         $category->save();
 
         return redirect()->route('stores::categories::show', [$store, $category]);

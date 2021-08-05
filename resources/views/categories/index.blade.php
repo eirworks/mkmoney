@@ -17,7 +17,20 @@
 
         <div class="my-3">
             <div class="btn-group">
-                <a href="{{ route('stores::categories::store', [$store]) }}" class="btn btn-primary">Tambah Kategori</a>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Tambah Kategori</button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="{{ route('stores::categories::store', [$store]) }}" class="dropdown-item">Kategori Pemasukan</a>
+                            <a href="{{ route('stores::categories::store', [$store, 'type' => 'expenditure']) }}" class="dropdown-item">Kategori Pengeluaran</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary" href="{{ route('stores::categories::index', [$store]) }}">Semua</a>
+                <a class="btn btn-outline-secondary" href="{{ route('stores::categories::index', [$store, 'type' => 'income']) }}">Pemasukan</a>
+                <a class="btn btn-outline-secondary" href="{{ route('stores::categories::index', [$store, 'type' => 'expenditure']) }}">Pengeluaran</a>
             </div>
         </div>
 
@@ -27,6 +40,7 @@
                 <tr>
                     <th>Nama Kategori</th>
                     <th>Sub Kategori dari</th>
+                    <th>Tipe Kategori</th>
                     <th>Deskripsi</th>
                 </tr>
                 </thead>
@@ -40,6 +54,13 @@
                         <td>
                             @if($category->parent_id > 0)
                                 <a href="{{ route('stores::categories::show', [$store, $category->parent_id]) }}">{{ $category->parent->name }}</a>
+                            @endif
+                        </td>
+                        <td>
+                            @if($category->is_expenditure)
+                                Pengeluaran
+                            @else
+                                Pemasukan
                             @endif
                         </td>
                         <td class="text-muted">{{ $category->description }}</td>

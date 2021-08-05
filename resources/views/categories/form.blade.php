@@ -4,7 +4,7 @@
     @if($category->id)
         Edit Kategori "{{ $category->name }}"
     @else
-        Tambah Kategori
+        Tambah Kategori {{ request()->input('type') == 'expenditure' ? 'Pengeluaran' : 'Pemasukan' }}
     @endif
 @endsection
 
@@ -31,6 +31,15 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-3">
+                                <label for="parent_id">Pilih Kategori Utama</label>
+                                <select dusk="parent_id" name="parent_id" id="parent_id" class="form-control">
+                                    <option value="0">- Tanpa Kategori Utama -</option>
+                                    @foreach($parent_categories as $parent_category)
+                                        <option value="{{ $parent_category->id }}">{{ $parent_category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="mb-3">
                                 <label for="name">Nama Kategori</label>
                                 <input type="text" id="name" class="form-control" name="name" value="{{ $category->name }}">
                             </div>
@@ -44,7 +53,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-primary">Simpan</button>
+                            <button class="btn btn-primary" dusk="submit">Simpan</button>
                             <a href="{{ route('stores::categories::index', [$store]) }}" class="btn btn-link">Batal</a>
                         </div>
                     </div>
