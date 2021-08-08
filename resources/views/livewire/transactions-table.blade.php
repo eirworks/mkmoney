@@ -50,11 +50,15 @@
             <thead class="bg-primary text-white">
             <tr>
                 <th>Tanggal</th>
+                @if($expenditure)
                 <th>Nama Toko</th>
                 <th>Keterangan</th>
+                @endif
                 <th>Kategori</th>
                 <th>Qty</th>
+                @if($expenditure)
                 <th>Unit</th>
+                @endif
                 <th class="text-end">Harga</th>
                 <th class="text-end">Subtotal</th>
             </tr>
@@ -67,11 +71,15 @@
                 @foreach($transactions as $transaction)
                     <tr>
                         <td><button class="btn btn-link text-dark p-0 m-0" wire:click="$set('transactionSelected', '{{ $transaction->id }}')">{{ \Illuminate\Support\Carbon::simpleDate($transaction->purchased_at) }}</button></td>
+                        @if($expenditure)
                         <td>{{ $transaction->shop }}</td>
                         <td>{{ $transaction->info }}</td>
+                        @endif
                         <td><button class="btn btn-link p-0 m-0" wire:click="setCategory({{ $transaction->category_id }})">{{ $transaction->category->name }}</button></td>
                         <td>{{ $transaction->qty }}</td>
+                        @if($expenditure)
                         <td>{{ $transaction->unit }}</td>
+                        @endif
                         <td class="text-end">{{ \Illuminate\Support\Str::currency(abs($transaction->amount), 'Rp') }}</td>
                         <td class="text-end">{{ \Illuminate\Support\Str::currency(abs($transaction->amount * $transaction->qty), 'Rp') }}</td>
                     </tr>
@@ -112,11 +120,11 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="8" class="text-center text-muted">Tidak ada data untuk bulan ini</td>
+                    <td colspan="{{ $expenditure ? '8' : '6' }}" class="text-center text-muted">Tidak ada data untuk bulan ini</td>
                 </tr>
             @endif
             <tr class="bg-light">
-                <td colspan="7" class="fw-bold text-end">Total</td>
+                <td colspan="{{ $expenditure ? '7' : '4' }}" class="fw-bold text-end">Total</td>
                 <td class="fw-bold text-end">{{ \Illuminate\Support\Str::currency(abs($total), "Rp") }}</td>
             </tr>
             </tbody>
