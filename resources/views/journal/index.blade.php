@@ -51,18 +51,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr class="bg-light">
-                <td></td>
-                <td>Modal</td>
-                <td></td>
-                <td>{{ Str::currency(($starting_balance), 'Rp') }}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>Kas</td>
-                <td>{{ Str::currency(($starting_balance), 'Rp') }}</td>
-                <td></td>
-            </tr>
+{{--            <tr class="bg-light">--}}
+{{--                <td></td>--}}
+{{--                <td>Modal</td>--}}
+{{--                <td></td>--}}
+{{--                <td>{{ Str::currency(($starting_balance), 'Rp') }}</td>--}}
+{{--            </tr>--}}
+{{--            <tr>--}}
+{{--                <td></td>--}}
+{{--                <td>Kas</td>--}}
+{{--                <td>{{ Str::currency(($starting_balance), 'Rp') }}</td>--}}
+{{--                <td></td>--}}
+{{--            </tr>--}}
             @foreach($transactions as $transaction)
                 <tr class="bg-light">
                     <td>{{ $transaction->created_at->format('d/m/Y') }}</td>
