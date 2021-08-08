@@ -2,8 +2,10 @@
 
 namespace Tests\Browser\App;
 
+use App\Http\Livewire\TransactionInput;
 use App\Models\Category;
 use App\Models\Store;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -11,6 +13,14 @@ use Tests\DuskTestCase;
 
 class IncomeInputTest extends DuskTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        Store::truncate();
+        Category::truncate();
+        Transaction::truncate();
+    }
+
     public function test_input_income()
     {
         $this->browse(function (Browser $browser) {
@@ -19,19 +29,15 @@ class IncomeInputTest extends DuskTestCase
             $subcategory = Category::factory()->create(['parent_id' => $category->id, 'store_id' => $store->id]);
             $user = User::first();
             $this->assertEquals(0, $store->transactions()->count());
-            $browser
-                ->loginAs($user)
-                ->visit(route('stores::income::index', [$store]))
-                ->assertSee('Pendapatan')
-                ->value('#purchased_at', now()->format('Y-m-d'))
-                ->value("#category_id", $subcategory->id)
-                ->value('#amount', 50000)
-                ->value('#qty', 1)
-                ->screenshot("1")
-                ->click('@submit_trx')
-                ->pause(2000)
-                ->screenshot("2")
-            ;
+            $this->actingAs($user);
+            \Livewire::test(TransactionInput::class, [
+                'store' => $store
+            ])
+                ->set('expenditure', false)
+                ->set('category_id', $subcategory->id)
+                ->set('amount', 50000)
+                ->set('qty', 1)
+                ->call('submitTransaction');
             $this->assertEquals(1, $store->transactions()->count());
         });
     }

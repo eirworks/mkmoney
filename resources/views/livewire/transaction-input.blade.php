@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <button class="btn btn-primary" dusk="submit_trx" wire:click="submitTransaction">Tambahkan</button>
+                            <button class="btn btn-primary" id="submit_trx" dusk="submit_trx" wire:click="submitTransaction">Tambahkan</button>
                         </div>
                         <div class="col-md-3">
                             <div class="text-muted" wire:loading wire:target="submitTransaction">Tunggu sebentar...</div>
