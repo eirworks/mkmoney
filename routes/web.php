@@ -79,6 +79,10 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/stats/expenditure', [\App\Http\Controllers\ReportController::class, 'statExpenditure'])->name('expenditure');
             Route::get('/stats/income', [\App\Http\Controllers\ReportController::class, 'statIncome'])->name('income::stat');
         });
+
+        Route::group(['prefix' => '{store}/journal', 'as' => 'journal::'], function() {
+            Route::get('/', [\App\Http\Controllers\JournalController::class, 'index'])->name('index');
+        });
     });
 
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function() {

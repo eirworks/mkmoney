@@ -27,6 +27,7 @@
                     <a href="{{ route('stores::income::index', [$store]) }}" class="list-group-item">Pendapatan</a>
                     <a href="{{ route('stores::expenditures::index', [$store]) }}" class="list-group-item">Pengeluaran</a>
                     <a href="{{ route('stores::reports::income', [$store]) }}" class="list-group-item">Laporan Laba Rugi</a>
+                    <a href="{{ route('stores::journal::index', [$store]) }}" class="list-group-item">Jurnal</a>
                 </nav>
             </div>
             <div class="col-md-9">
