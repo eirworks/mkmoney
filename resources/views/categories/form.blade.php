@@ -28,6 +28,7 @@
                         @method('put')
                     @endif
                     @csrf
+                    <input type="hidden" id="expenditure" name="expenditure" value="{{ $category->is_expenditure }}">
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-3">

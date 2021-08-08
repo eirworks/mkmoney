@@ -30,9 +30,34 @@ class CategoryFormTest extends DuskTestCase
                 ->value("#name", $category->name)
                 ->value("#description", $category->description)
                 ->value("#color", $category->color)
+                ->assertValue("#expenditure", "")
                 ->click("@submit")
                 ->assertSee($category->name)
             ;
+
+            $latestCategory = Category::latest()->first();
+            $latestCategory->is_expenditure = false;
+        });
+    }
+
+    public function test_create_category_for_expenditure()
+    {
+        $this->browse(function (Browser $browser) {
+            $user = User::factory()->create();
+            $store = Store::factory()->create();
+            $category = Category::factory()->make();
+            $browser->loginAs($user)
+                ->visit(route('stores::categories::create', [$store, 'type' => 'expenditure']))
+                ->value('@parent_id', "0")
+                ->value("#name", $category->name)
+                ->value("#description", $category->description)
+                ->value("#color", $category->color)
+                ->assertValue("#expenditure", "1")
+                ->click("@submit")
+                ->assertSee($category->name)
+            ;
+            $latestCategory = Category::latest()->first();
+            $latestCategory->is_expenditure = true;
         });
     }
 

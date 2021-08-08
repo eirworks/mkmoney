@@ -36,10 +36,12 @@ class CategoryController extends Controller
 
     public function create(Store $store, Request $request)
     {
+        $isExpenditure = $request->input('type') == 'expenditure';
         $category = new Category();
+        $category->is_expenditure = $isExpenditure;
         $parentCategories = $store->categories()
             ->onlyParent()
-            ->where('is_expenditure', $request->input('type') == 'expenditure')
+            ->where('is_expenditure', $isExpenditure)
             ->get();
 
         return view('categories.form', [
@@ -69,6 +71,7 @@ class CategoryController extends Controller
         $category = new Category($request->only(['name', 'color', 'parent_id']));
         $category->store_id = $store->id;
         $category->description = $request->input('description', "Kategori") ?? $category->name;
+        $category->is_expenditure = $request->input('is_expenditure', false);
         $category->save();
 
         return redirect()->route('stores::categories::show', [$store, $category]);
