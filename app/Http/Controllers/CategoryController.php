@@ -66,8 +66,9 @@ class CategoryController extends Controller
 
     public function store(Request $request, Store $store)
     {
-        $category = new Category($request->only(['name', 'description', 'color', 'parent_id']));
+        $category = new Category($request->only(['name', 'color', 'parent_id']));
         $category->store_id = $store->id;
+        $category->description = $request->input('description', "Kategori") ?? $store->name;
         $category->save();
 
         return redirect()->route('stores::categories::show', [$store, $category]);
