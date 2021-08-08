@@ -4,15 +4,11 @@ php:
   - '7.4'
 services:
   - mysql
-before_script:
-  - wget https://repo.mysql.com//mysql-apt-config_0.8.10-1_all.deb
-  - sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb
-  - sudo apt-get update -q
-  - sudo apt-get install -q -y --allow-unauthenticated -o Dpkg::Options::=--force-confnew mysql-server
-  - sudo systemctl restart mysql
-  - sudo mysql_upgrade
+addons:
+  chrome: stable
+
+install:
   - sudo mysql -e "create database mkmoney"
-  - mysql --version
   - travis_retry composer self-update
   - travis_retry composer install --no-interaction
   - cp .env.test .env
@@ -20,6 +16,9 @@ before_script:
   - php artisan migrate:fresh --seed
   - php artisan dusk:install
   - php artisan dusk:chrome-driver --detect
+before_script:
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - php artisan serve --no-reload &
 
 script:
   - vendor/bin/phpunit
