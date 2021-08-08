@@ -4,6 +4,7 @@ namespace Tests\Browser\App;
 
 use App\Models\Category;
 use App\Models\Store;
+use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
@@ -16,6 +17,7 @@ class CategoryFormTest extends DuskTestCase
         parent::setUp();
         Category::truncate();
         Store::truncate();
+        Transaction::truncate();
     }
 
     public function test_create_category()

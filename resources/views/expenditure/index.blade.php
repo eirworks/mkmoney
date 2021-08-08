@@ -15,7 +15,7 @@
         <h2>@yield('title')</h2>
 
         <div class="my-3 d-print-none">
-            <livewire:transaction-input :store="$store" />
+            <livewire:transaction-input :store="$store" :expenditure="true" />
         </div>
 
         <div class="my-3">
