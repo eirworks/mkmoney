@@ -30,13 +30,14 @@ class CategoryFormTest extends DuskTestCase
                 ->value("#name", $category->name)
                 ->value("#description", $category->description)
                 ->value("#color", $category->color)
-                ->assertValue("#expenditure", "")
+                ->assertValue("#expenditure", "0")
                 ->click("@submit")
                 ->assertSee($category->name)
+                ->screenshot("1")
             ;
 
             $latestCategory = Category::latest()->first();
-            $latestCategory->is_expenditure = false;
+            $this->assertFalse($latestCategory->is_expenditure);
         });
     }
 
@@ -55,9 +56,10 @@ class CategoryFormTest extends DuskTestCase
                 ->assertValue("#expenditure", "1")
                 ->click("@submit")
                 ->assertSee($category->name)
+                ->screenshot("1")
             ;
             $latestCategory = Category::latest()->first();
-            $latestCategory->is_expenditure = true;
+            $this->assertTrue($latestCategory->is_expenditure);
         });
     }
 

@@ -71,7 +71,7 @@ class CategoryController extends Controller
         $category = new Category($request->only(['name', 'color', 'parent_id']));
         $category->store_id = $store->id;
         $category->description = $request->input('description', "Kategori") ?? $category->name;
-        $category->is_expenditure = $request->input('is_expenditure', false);
+        $category->is_expenditure = $request->input('expenditure', false);
         $category->save();
 
         return redirect()->route('stores::categories::show', [$store, $category]);

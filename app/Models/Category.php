@@ -44,6 +44,10 @@ class Category extends Model
         'name', 'description', 'color', 'parent_id'
     ];
 
+    protected $casts = [
+        'is_expenditure' => 'bool',
+    ];
+
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
