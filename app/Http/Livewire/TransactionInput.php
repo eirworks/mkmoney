@@ -46,7 +46,7 @@ class TransactionInput extends Component
             'shop' => $this->shop,
             'qty' => $this->qty,
             'unit' => $this->unit,
-            'amount' => $this->amount,
+            'amount' => $this->amount * ($this->expenditure ? -1 : 1),
             'category_id' => $this->category_id,
             'purchased_at' => $this->purchased_at,
         ]);
