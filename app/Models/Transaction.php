@@ -50,6 +50,10 @@ class Transaction extends Model
         'purchased_at' => 'datetime',
     ];
 
+    public static function ledgetTypes() {
+        return ['costs', 'cash', 'income'];
+    }
+
     public function category() {
         return $this->belongsTo(Category::class);
     }
