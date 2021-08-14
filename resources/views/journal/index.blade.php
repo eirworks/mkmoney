@@ -74,16 +74,9 @@
                         @endif
                     </td>
                     <td>
-                        @if($transaction->amount > 0)
-                        @else
-                            {{ Str::currency(abs($transaction->amount), "Rp") }}
-                        @endif
+                        {{ Str::currency(abs($transaction->amount), "Rp") }}
                     </td>
                     <td>
-                        @if($transaction->amount > 0)
-                            {{ Str::currency(abs($transaction->amount), "Rp") }}
-                        @else
-                        @endif
                     </td>
                 </tr>
                 <tr class="border-dark">
@@ -96,16 +89,9 @@
                         @endif
                     </td>
                     <td>
-                        @if($transaction->amount > 0)
-                            {{ Str::currency(abs($transaction->amount), "Rp") }}
-                        @else
-                        @endif
                     </td>
                     <td>
-                        @if($transaction->amount > 0)
-                        @else
-                            {{ Str::currency(abs($transaction->amount), "Rp") }}
-                        @endif
+                        {{ Str::currency(abs($transaction->amount), "Rp") }}
                     </td>
                 </tr>
             @endforeach

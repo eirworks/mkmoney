@@ -28,6 +28,7 @@
                     <a href="{{ route('stores::expenditures::index', [$store]) }}" class="list-group-item">Pengeluaran</a>
                     <a href="{{ route('stores::reports::income', [$store]) }}" class="list-group-item">Laporan Laba Rugi</a>
                     <a href="{{ route('stores::journal::index', [$store]) }}" class="list-group-item">Jurnal</a>
+                    <a href="{{ route('stores::ledger::index', [$store]) }}" class="list-group-item">Buku Besar</a>
                 </nav>
             </div>
             <div class="col-md-9">

@@ -83,6 +83,10 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['prefix' => '{store}/journal', 'as' => 'journal::'], function() {
             Route::get('/', [\App\Http\Controllers\JournalController::class, 'index'])->name('index');
         });
+
+        Route::group(['prefix' => '{store}/ledger', 'as' => 'ledger::'], function() {
+            Route::get('/', [\App\Http\Controllers\LedgerController::class, 'index'])->name('index');
+        });
     });
 
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin::'], function() {
